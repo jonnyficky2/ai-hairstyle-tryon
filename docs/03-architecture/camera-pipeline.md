@@ -1,6 +1,6 @@
 # Camera Pipeline
 
-> Status: PROPOSED · Last updated: 2026-11-09
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
 > Requirement: FR-01, FR-13, FR-15, FR-18. ADR-007.
 
 ## 1. Constraints and preconditions

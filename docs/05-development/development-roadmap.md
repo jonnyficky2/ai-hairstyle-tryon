@@ -23,7 +23,7 @@
 - **Exit criteria:** product scope approved (TASK-013); architecture approved (TASK-014); open
   questions resolved or explicitly deferred (TASK-016); privacy copy approved (TASK-017); asset
   sourcing decided (TASK-015).
-- **Status:** documentation complete; approvals pending.
+- **Status:** closed 2026-11-18. All approval gates resolved except asset sourcing (TASK-015).
 
 ## Phase 1 — Project Foundation
 

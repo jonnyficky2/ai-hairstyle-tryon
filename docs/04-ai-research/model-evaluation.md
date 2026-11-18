@@ -92,7 +92,7 @@ quality is insufficient.
 
 ## 3. Decision
 
-MediaPipe Face Landmarker is the **proposed** choice. It is the strongest documented option for
+MediaPipe Face Landmarker is the **approved** choice (ADR-004, 2026-11-18). It is the strongest documented option for
 on-device landmarks plus pose, but it does not solve hairstyle alignment or occlusion.
 
 ## 4. What would change the decision

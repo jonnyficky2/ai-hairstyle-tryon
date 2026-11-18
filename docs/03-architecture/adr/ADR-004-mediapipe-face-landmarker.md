@@ -26,7 +26,7 @@ browser support, licensing, and integration effort for a live 2D hairstyle overl
 ## Decision
 
 Use MediaPipe Face Landmarker in `VIDEO` running mode with 478 landmarks and the optional 4×4
-transformation matrix. **PROPOSED**, not approved.
+transformation matrix. **APPROVED** 2026-11-18.
 
 ## Rationale
 

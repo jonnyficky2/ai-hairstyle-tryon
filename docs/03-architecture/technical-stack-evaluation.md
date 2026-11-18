@@ -1,6 +1,6 @@
 # Technical Stack Evaluation
 
-> Status: PROPOSED · Last updated: 2026-11-09
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
 > Verification date: 2026-11-09. Sources are official docs, npm registry metadata, and the
 > MediaPipe license file. No runtime benchmark was executed; performance claims are targets.
 
@@ -13,13 +13,16 @@ pinned and re-verified at implementation time.
 |---|---|---|---|---|
 | `@mediapipe/tasks-vision` | 1.2.2 | Apache-2.0 | not declared | 31.3 MB (all WASM variants) |
 | `react` | 19.3.1 | MIT | `node >=0.10.0` | 179 KB |
-| `vite` | 8.3.6 | MIT | `node ^20.19.0 \|\| >=22.12.0` | 2.4 MB |
+| `vite` | 8.3.8 | MIT | `node ^20.19.0 \|\| >=22.12.0` | 2.4 MB |
 | `typescript` | 7.0.2 | Apache-2.0 | `node >=16.20.0` | 2.5 MB |
 | `tailwindcss` | 4.3.5 | MIT | not declared | 787 KB |
 | `vitest` | 5.1.0 | MIT | `node ^22.12.0 \|\| ^24.0.0 \|\| >=26.0.0` | 2.9 MB |
 | `@playwright/test` | 1.65.0 | Apache-2.0 | `node >=20` | 28.5 KB |
 
 **Practical Node baseline:** Node.js 22.12 or newer satisfies Vite and Vitest simultaneously.
+
+**Drift note (2026-11-18):** Vite moved 8.3.6 → 8.3.8 between the Phase 0 audit and the scaffold.
+8.3.8 is the version pinned in `package.json`. Re-verify again before release.
 
 ## 2. Face tracking — MediaPipe Face Landmarker
 

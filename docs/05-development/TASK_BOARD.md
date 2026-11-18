@@ -18,34 +18,34 @@
 Rules:
 - A task is `DONE` only per `docs/05-development/definition-of-done.md`.
 - Never assume a dependency is complete; open its evidence first.
-- IDs are permanent. Next free numeric ID: **085**.
+- IDs are permanent. Next free numeric ID: **087**.
 
 ## Summary
 
 | Metric | Value |
 |---|---|
-| Total tasks | 69 |
-| DONE | 16 |
-| TODO | 51 |
-| BLOCKED | 2 |
+| Total tasks | 71 |
+| DONE | 18 |
+| TODO | 49 |
+| BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
-| P1 tasks | 14 |
-| Overall completion | 23% (16/69) |
+| P1 tasks | 16 |
+| Overall completion | 25% (18/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027 | 0/8 | 0% | TODO |
+| M1 | Project Foundation | TASK-020…027, 085 | 2/9 | 22% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 0/4 | 0% | TODO |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
 | M5 | User Experience | TASK-060…068 | 0/9 | 0% | TODO |
-| M6 | Quality & Optimization | TASK-070…078 | 0/9 | 0% | TODO |
+| M6 | Quality & Optimization | TASK-070…078, 086 | 0/10 | 0% | TODO |
 | M7 | Deployment | TASK-080…084 | 0/5 | 0% | TODO |
 
 M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. All approval gates
@@ -55,9 +55,9 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017 |
-| TODO | TASK-020…027, 030…033, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
-| BLOCKED | TASK-015, TASK-051 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020, TASK-021 |
+| TODO | TASK-022…027, 030…033, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
 | CANCELLED | — |
@@ -224,21 +224,23 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 
 ## Phase 1 — Project Foundation (M1)
 
-### TASK-020 — Initialize git repository and remote
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: S
+### TASK-020 — Initialize git repository
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: S
 - Dependencies: TASK-013, TASK-014
-- Description: Initialize git, add `.gitignore`, create the initial commit, connect a remote.
+- Description: Initialize git, add `.gitignore`, create the initial commit.
 - Acceptance: Repository initialized; documentation committed; build artifacts ignored.
 - Verification: `git log`, `git status`, `.gitignore` inspection.
-- Evidence: Commit hash; remote URL.
+- Evidence: commits `061d2e9` (docs baseline) and `16deee8` (scaffold); `git status` clean.
+- Note: remote connection split out to TASK-085 (D-019).
 
 ### TASK-021 — Scaffold Vite + React + TypeScript
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-020
 - Description: Create the app with pinned versions and strict TypeScript.
 - Acceptance: Dev server runs; production build succeeds; versions pinned.
-- Verification: `npm run dev`, `npm run build`, `tsc --noEmit`.
-- Evidence: Command output; lockfile.
+- Verification: `npm run build`, `tsc --noEmit`.
+- Evidence: `tsc --noEmit` exit 0; `npm run build` produced `dist/index.html` + `dist/assets/index-BmJ4yGqb.js` (219.75 kB, gzip 68.71 kB); dev server returned HTTP 200 with React refresh injected. Pinned: vite 8.3.8, react/react-dom 19.3.1, typescript 7.0.2, @vitejs/plugin-react 6.3.0.
+- Note: port 5173 is occupied by another local project, so `npm run dev` falls through to 5174. Use `npx vite --port <n> --strictPort` when a fixed port matters.
 
 ### TASK-022 — Configure Tailwind CSS and design tokens
 - Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
@@ -653,13 +655,33 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - Verification: Tag inspection; release page.
 - Evidence: Tag hash; release URL.
 
+## Phase 8 — Repository & Supply Chain Follow-ups
+
+### TASK-085 — Connect git remote
+- Phase: 8 · Milestone: M1 · Priority: P1 · Status: **BLOCKED** · Complexity: S
+- Dependencies: TASK-020
+- Description: Create the remote repository and push the local history.
+- Acceptance: `git remote -v` shows an origin; `git push -u origin main` succeeds.
+- Verification: `git remote -v` and `git log --oneline origin/main`.
+- Evidence: Remote URL; push output.
+- Blocker: Host and account not chosen by the project owner. No remote exists.
+
+### TASK-086 — Track picomatch ReDoS advisory in the build toolchain
+- Phase: 8 · Milestone: M6 · Priority: P1 · Status: **BLOCKED** · Complexity: S
+- Dependencies: TASK-021
+- Description: `npm audit` reports 5 high-severity advisories (GHSA-fc5q-39xc-vjpf) reached through `vite → tinyglobby → fdir → picomatch`. The only offered fix downgrades Vite to 6.2.7, which is a breaking change. The package is build-time only and is not shipped in `dist/`.
+- Acceptance: Advisory resolved by an upstream Vite release, or an explicit accepted-risk record with justification.
+- Verification: `npm audit` shows 0 high-severity findings, or the accepted-risk record is approved.
+- Evidence: `npm audit` output before and after.
+- Blocker: Upstream fix not released.
+
 ---
 
 ## Dependency validation
 
 - All dependency IDs exist.
 - No dependency points to a higher-numbered task except none; the graph is acyclic.
-- Blocked tasks: TASK-015 (no sourcing decision), TASK-051 (depends on TASK-015).
-- Independent work that can start once approvals land: TASK-020 (git), TASK-021 (scaffold),
-  TASK-040 (self-host runtime) after TASK-021.
+- Blocked tasks: TASK-015 (no sourcing decision), TASK-051 (depends on TASK-015),
+  TASK-085 (no remote chosen), TASK-086 (upstream advisory unfixed).
+- Independent work that can start now: TASK-022, TASK-023, TASK-024, TASK-025, then TASK-040.
 - Verification of completion is by evidence, not by checkbox.

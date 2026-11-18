@@ -18,16 +18,16 @@ The MVP is **not** a photorealistic generative hair replacement system.
 
 | Item | State |
 |---|---|
-| Phase | Phase 0 — Documentation and research |
-| Application source code | None |
-| Dependencies installed | None |
-| Git repository | Not initialized |
-| Documentation system | Complete draft |
-| Product scope approval | Pending (TASK-013) |
-| Architecture approval | Pending (TASK-014) |
-| Implementation authorization | Not granted |
+| Phase | Phase 1 — Project foundation |
+| Application source code | Scaffold only (no features) |
+| Dependencies installed | Yes, pinned |
+| Git repository | Initialized locally, no remote |
+| Documentation system | Approved |
+| Product scope approval | Closed 2026-11-18 |
+| Architecture approval | Closed 2026-11-18 |
+| Implementation authorization | Granted 2026-11-18 |
 
-The project must not enter Phase 1 until TASK-013, TASK-014, and TASK-016 are resolved.
+Phase 4 (hairstyle assets) cannot start until TASK-015 is resolved.
 
 ## 3. Documentation layers
 

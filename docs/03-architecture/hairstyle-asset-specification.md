@@ -1,6 +1,6 @@
 # Hairstyle Asset Specification
 
-> Status: PROPOSED · Last updated: 2026-11-09
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
 > Requirement: FR-05, FR-08. ADR-008. Sourcing is blocked by TASK-015.
 
 ## 1. Format

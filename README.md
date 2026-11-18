@@ -4,11 +4,20 @@ Live-camera virtual hairstyle try-on for the browser. Users see hairstyles rende
 own face in real time, compare styles, and download a snapshot. Processing is intended to stay
 on-device.
 
-**Status:** Phase 0 (documentation and research) — documentation system complete, **implementation not started**.
-No application source code, dependencies, or deployment exist in this repository yet.
+**Status:** Phase 1 (project foundation) — documentation approved, scaffold in place.
+No camera, tracking, rendering, or UI feature exists yet. See
+[TASK_BOARD.md](docs/05-development/TASK_BOARD.md).
 
-**Approval gates open:** product scope (TASK-013), architecture decisions (TASK-014), open product
-questions (TASK-016). See [TASK_BOARD.md](docs/05-development/TASK_BOARD.md).
+**Approval gates closed 2026-11-18:** product scope (TASK-013), architecture (TASK-014), open
+product questions (TASK-016), privacy copy (TASK-017). Still open: asset sourcing (TASK-015,
+blocks Phase 4) and the model bundle licence (blocks commercial launch only).
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run typecheck
+npm run build
+```
 
 ---
 

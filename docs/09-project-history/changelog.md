@@ -6,6 +6,18 @@ exist. Format loosely follows Keep a Changelog.
 ## [Unreleased]
 
 ### Added
+- Phase 1 scaffold: Vite 8.3.8, React 19.3.1, TypeScript 7.0.2 (strict), `.gitignore`.
+- `docs/07-security/privacy-notice-copy.md` — approved privacy and consent copy.
+- TASK-085 (connect git remote) and TASK-086 (picomatch advisory tracking).
+
+### Changed
+- ADR-001…ADR-011 moved from PROPOSED to APPROVED (2026-11-18).
+- PRD §7 replaced with resolved product decisions.
+- Decision log P-001…P-010 resolved except asset sourcing and model licence.
+- TASK-020 scope reduced to local repository init; remote split to TASK-085.
+- Vite pin corrected from 8.3.6 to 8.3.8.
+
+### Added (documentation baseline)
 - Complete documentation system under `docs/00-project-overview` … `docs/09-project-history`.
 - Product vision, scope, PRD, MVP specification, user journey, user stories, acceptance criteria.
 - UI/UX specification and proposed design system.

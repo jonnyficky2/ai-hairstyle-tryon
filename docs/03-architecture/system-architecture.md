@@ -1,6 +1,6 @@
 # System Architecture
 
-> Status: PROPOSED · Last updated: 2026-11-09
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
 > Decisions referenced as ADR-xxx live in `docs/03-architecture/adr/`.
 
 ## 1. Architectural style

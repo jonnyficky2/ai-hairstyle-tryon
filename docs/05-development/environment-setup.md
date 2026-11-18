@@ -40,7 +40,8 @@ npm run preview
 
 ## 3. Local camera requirements
 
-- Use `http://localhost:5173` (localhost is treated as a secure context).
+- Use `http://localhost:5173` (localhost is treated as a secure context). If 5173 is taken, Vite
+  picks the next free port; check the terminal output.
 - Do not test camera access over a plain-HTTP LAN IP; it will fail.
 - Grant camera permission when prompted; verify the browser camera indicator.
 - For remote-device testing, use HTTPS (tunnel or preview deployment).
@@ -85,8 +86,10 @@ No secrets are required for the MVP. If any are introduced:
 
 ## 8. Repository state
 
-At the time of writing:
+At the time of writing (2026-11-18):
 
-- Git is not initialized.
-- No `package.json` exists.
-- Only documentation exists.
+- Git is initialized locally; no remote yet (TASK-085).
+- `package.json` exists with pinned versions; `node_modules` is ignored.
+- Scaffold only: `index.html`, `src/main.tsx`, `src/App.tsx`, `vite.config.ts`, `tsconfig.json`.
+- No camera, tracking, rendering, or UI feature code exists.
+- No test runner, linter, or CSS framework is configured yet (TASK-022, TASK-023, TASK-024).

@@ -1,7 +1,7 @@
 # Component Architecture
 
-> Status: PROPOSED · Last updated: 2026-11-09
-> Interfaces are contracts, not implementation. No source code exists yet.
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
+> Interfaces are contracts, not implementation. Only a Vite + React + TypeScript scaffold exists.
 
 ## 1. Module map
 

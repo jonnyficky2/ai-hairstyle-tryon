@@ -100,3 +100,14 @@ Notes:
 - Whether the host injects headers or requires a configuration file.
 - Subresource integrity strategy for self-hosted runtime files.
 - Legal retention obligations for host logs.
+
+## 10. Known advisories (2026-11-18)
+
+`npm audit` after the Phase 1 scaffold reports **5 high-severity findings**, all one advisory:
+
+| Advisory | Path | Exposure | Decision |
+|---|---|---|---|
+| GHSA-fc5q-39xc-vjpf — picomatch ReDoS via single-branch repeated extglobs | `vite → tinyglobby → fdir → picomatch` | Build time only; the package is not shipped in `dist/` and no untrusted glob patterns are supplied by users | Accepted and tracked in TASK-086. The only offered fix downgrades Vite to 6.2.7, a breaking change (D-020). |
+
+This is a dev-toolchain issue, not a runtime exposure. It must be resolved before release or
+formally accepted with the reasoning above.

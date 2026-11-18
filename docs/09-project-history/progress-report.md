@@ -7,35 +7,36 @@
 
 | Item | State |
 |---|---|
-| Phase | 0 — Documentation and research |
-| Milestone | M0 in progress |
-| Application code | None |
-| Dependencies | None |
-| Git repository | Not initialized |
+| Phase | 1 — Project Foundation |
+| Milestone | M1 in progress |
+| Application code | Vite + React + TypeScript scaffold only |
+| Dependencies | Installed and pinned |
+| Git repository | Initialized locally; no remote |
 | Deployment | None |
-| Implementation authorization | Not granted |
+| Implementation authorization | Granted 2026-11-18 |
 
 ## 2. Completion
 
 | Metric | Value |
 |---|---|
-| Tasks total | 69 |
-| Done | 12 |
+| Tasks total | 71 |
+| Done | 18 |
 | In progress | 0 |
-| Blocked | 2 |
+| Blocked | 4 |
 | Review | 0 |
-| To do | 55 |
-| Overall completion | 17% |
+| To do | 49 |
+| Overall completion | 25% |
 
 | Milestone | Completion |
 |---|---|
-| M0 Documentation & Research | 71% (12/17) |
+| M0 Documentation & Research | 94% (16/17) |
+| M1 Project Foundation | 22% (2/9) |
 | M1 Project Foundation | 0% |
 | M2 Camera System | 0% |
 | M3 Face Detection & Tracking | 0% |
 | M4 Hairstyle Rendering | 0% |
 | M5 User Experience | 0% |
-| M6 Quality & Optimization | 0% |
+| M6 Quality & Optimization | 0% (0/10) |
 | M7 Deployment | 0% |
 
 ## 3. What was completed in this session
@@ -53,11 +54,10 @@
 
 | ID | Blocker | Owner | Impact |
 |---|---|---|---|
-| B-01 | Product scope/PRD not approved (TASK-013) | Project owner | Blocks Phase 1 |
-| B-02 | ADRs not approved (TASK-014) | Project owner | Blocks Phase 1 |
-| B-03 | Open product questions (TASK-016) | Project owner | Blocks copy, tracking policy, test baseline |
-| B-04 | Privacy notice not approved (TASK-017) | Project owner | Blocks release |
-| B-05 | Asset sourcing/licensing undecided (TASK-015) | Project owner | Blocks TASK-051 |
+| B-01 | Asset sourcing/licensing undecided (TASK-015) | Project owner | Blocks TASK-051 and all of Phase 4 |
+| B-02 | No git remote chosen (TASK-085) | Project owner | No backup or collaboration |
+| B-03 | picomatch advisory unfixed upstream (TASK-086) | Upstream | Build toolchain only; not shipped |
+| B-04 | Model bundle license unconfirmed (P-009) | Project owner | Blocks commercial launch, not development |
 
 ## 5. Risk register
 
@@ -80,9 +80,11 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 
 ## 7. Next actions
 
-1. Project owner reviews and approves TASK-013, TASK-014, TASK-016, TASK-017.
-2. Decide asset sourcing (TASK-015).
-3. Then start Phase 1 with TASK-020 and TASK-021.
+1. TASK-022 (Tailwind + design tokens), TASK-023 (ESLint + Prettier), TASK-024 (Vitest +
+   Playwright), TASK-025 (folder architecture).
+2. TASK-026 (app shell), then TASK-027 (CI).
+3. Decide asset sourcing (TASK-015) before Phase 4.
+4. Choose a git remote (TASK-085).
 
 ## 8. Session log
 
@@ -97,3 +99,34 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 - Remaining: approvals (TASK-013, 014, 016, 017), asset sourcing (TASK-015).
 - Assumptions: see `docs/04-ai-research/ai-research.md`.
 - Files modified: documentation only.
+
+### 2026-11-18 — Phase 0 approvals closed, Phase 1 scaffold
+
+- Tasks: TASK-013, TASK-014, TASK-016, TASK-017, TASK-020, TASK-021.
+- Completed:
+  - Approved PRD/scope/MVP/acceptance criteria (TASK-013).
+  - Approved ADR-001…ADR-011; ADR index carries the approval record (TASK-014).
+  - Resolved open product questions: English UI with centralized strings, single-face
+    detection, ±25°/±15°/±20° support claim, latest-2-versions browser baseline, no snapshot
+    watermark (TASK-016).
+  - Wrote and approved the privacy notice and consent copy at
+    `docs/07-security/privacy-notice-copy.md` (TASK-017).
+  - Initialized git, added `.gitignore`, two commits: `061d2e9` docs baseline, `16deee8`
+    scaffold (TASK-020).
+  - Scaffolded Vite 8.3.8 + React 19.3.1 + TypeScript 7.0.2 with strict mode
+    (TASK-021).
+- Commands run and real results:
+  - `node -v` → v24.16.0; `npm -v` → 11.13.0; `git --version` → 2.50.1.
+  - `npm install` → 24 packages added, 5 high-severity advisories (dev toolchain only).
+  - `npx tsc --noEmit` → exit 0.
+  - `npm run build` → `dist/index.html` 0.33 kB, `dist/assets/index-BmJ4yGqb.js` 219.75 kB
+    (gzip 68.71 kB), built in 55 ms.
+  - `npm audit` → GHSA-fc5q-39xc-vjpf via `vite → tinyglobby → fdir → picomatch`; only fix is a
+    breaking Vite downgrade. Recorded as TASK-086, not fixed.
+  - `git status --short` → clean.
+- Remaining: TASK-022…027 (Tailwind, lint, test runners, folders, shell, CI).
+- Blockers: TASK-015 (asset sourcing), TASK-085 (no remote), TASK-086 (upstream advisory),
+  P-009 (model license).
+- Assumptions: none new. Browser baseline and head-angle claim still need measurement
+  (TASK-058, TASK-074).
+- Files modified but not verified: none. No camera, tracking, or rendering code exists.

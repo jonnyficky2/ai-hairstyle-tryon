@@ -1,6 +1,6 @@
 # Hairstyle Rendering Specification
 
-> Status: PROPOSED · Last updated: 2026-11-09
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
 > Requirements: FR-05, FR-06, FR-09, FR-10. ADR-005, ADR-008.
 
 ## 1. Pipeline

@@ -1,6 +1,6 @@
 # Face Tracking Specification
 
-> Status: PROPOSED · Last updated: 2026-11-09
+> Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
 > Requirements: FR-02, FR-03, FR-04, FR-17. ADR-004.
 > Verified API facts are cited in `docs/04-ai-research/ai-research.md`.
 

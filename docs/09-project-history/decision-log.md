@@ -48,6 +48,8 @@ Related records: `docs/03-architecture/adr/README.md` (approval record),
 | D-016 | 2026-11-18 | Near-frontal support claim (±25° yaw, ±15° pitch, ±20° roll). | ACCEPTED | PRD §7 |
 | D-017 | 2026-11-18 | No snapshot watermark. | ACCEPTED | PRD §7 |
 | D-018 | 2026-11-18 | Pin Vite 8.3.8 (registry moved from 8.3.6 recorded in Phase 0). | ACCEPTED | Stack evaluation §1 |
+| D-019 | 2026-11-18 | Split TASK-020: local repository init is DONE; remote connection moved to TASK-085. | ACCEPTED | TASK_BOARD.md |
+| D-020 | 2026-11-18 | Do not downgrade Vite to silence the picomatch advisory; track it as TASK-086. | ACCEPTED | Security requirements §10 |
 
 ## 3. Decision process
 
