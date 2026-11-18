@@ -4,9 +4,8 @@ Live-camera virtual hairstyle try-on for the browser. Users see hairstyles rende
 own face in real time, compare styles, and download a snapshot. Processing is intended to stay
 on-device.
 
-**Status:** Phase 1 (project foundation) — documentation approved, scaffold in place.
-No camera, tracking, rendering, or UI feature exists yet. See
-[TASK_BOARD.md](docs/05-development/TASK_BOARD.md).
+**Status:** Phase 1 complete (scaffold + design tokens); Phase 2 (camera system) in progress —
+camera service and preview implemented. See [TASK_BOARD.md](docs/05-development/TASK_BOARD.md).
 
 **Approval gates closed 2026-11-18:** product scope (TASK-013), architecture (TASK-014), open
 product questions (TASK-016), privacy copy (TASK-017). Still open: asset sourcing (TASK-015,

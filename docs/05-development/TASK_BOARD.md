@@ -294,28 +294,36 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 ## Phase 2 — Camera System (M2)
 
 ### TASK-030 — Implement camera permission and lifecycle service
-- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **TODO** · Complexity: L
+- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **IN_PROGRESS** · Complexity: L
 - Dependencies: TASK-026
 - Description: Implement start, stop, device listing, typed errors, and state transitions.
 - Acceptance: AC-01, AC-15; all documented error codes mapped.
 - Verification: Unit tests with injected media devices; manual permission tests.
 - Evidence: Test output; manual state screenshots.
+- Note (2026-11-18): Implementation started — `src/features/camera/` created (`camera-state.ts`,
+  `camera-service.ts`, `use-camera.ts`) per approved component architecture. Typecheck and build pass.
+  Unit tests and manual camera permission UAT still pending (no test runner configured yet — TASK-024).
 
 ### TASK-031 — Implement video preview and device selection
-- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **IN_PROGRESS** · Complexity: M
 - Dependencies: TASK-030
 - Description: Render the stream to a video element and canvas; support front/back selection if P1 is kept.
 - Acceptance: Live preview visible; device switch does not leak tracks.
 - Verification: Manual + unit test for track stop.
 - Evidence: Recording; test output.
+- Note (2026-11-18): Implementation started — stream rendered to `<video>` + `<canvas>` via
+  `useCamera()` and rAF draw loop in `src/App.tsx`. Front/back device switch still pending;
+  typecheck + build pass. Manual preview verification pending.
 
 ### TASK-032 — Implement camera error and permission states UI
-- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **IN_PROGRESS** · Complexity: M
 - Dependencies: TASK-030
 - Description: Build UI for REQUESTING, DENIED, INITIALIZING, DEVICE_UNAVAILABLE, STOPPED, ERROR.
 - Acceptance: AC-13, AC-18; every state has actionable copy.
 - Verification: Manual walkthrough of each state.
 - Evidence: Screenshots per state.
+- Note (2026-11-18): Implementation started — state-driven copy rendered in `src/App.tsx`.
+  Typecheck + build pass. Manual walkthrough of each state pending.
 
 ### TASK-033 — Add camera state machine unit tests
 - Phase: 2 · Milestone: M2 · Priority: P1 · Status: **TODO** · Complexity: M

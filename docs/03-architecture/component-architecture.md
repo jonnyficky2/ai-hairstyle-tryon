@@ -1,7 +1,9 @@
 # Component Architecture
 
 > Status: APPROVED (2026-11-18) · Last updated: 2026-11-18
-> Interfaces are contracts, not implementation. Only a Vite + React + TypeScript scaffold exists.
+> Interfaces are contracts, not implementation. A Vite + React + TypeScript scaffold plus the
+> Phase 2 camera service module (`src/features/camera/`) now exist; only the scaffold existed at
+> approval time.
 
 ## 1. Module map
 

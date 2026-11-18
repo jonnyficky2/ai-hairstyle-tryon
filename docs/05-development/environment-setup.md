@@ -92,5 +92,7 @@ At the time of writing (2026-11-18):
 - `package.json` exists with pinned versions; `node_modules` is ignored.
 - Scaffold plus Tailwind: `index.html`, `src/main.tsx`, `src/App.tsx`, `src/styles/index.css`,
   `vite.config.ts`, `tsconfig.json`.
-- No camera, tracking, rendering, or UI feature code exists.
+- Camera feature module started (Phase 2): `src/features/camera/` with `camera-state.ts`,
+  `camera-service.ts`, `use-camera.ts`. Service-level implementation in progress (TASK-030);
+  preview/UI wiring pending (TASK-031, TASK-032).
 - No test runner or linter is configured yet (TASK-023, TASK-024).

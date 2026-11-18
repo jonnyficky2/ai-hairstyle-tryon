@@ -1,0 +1,21 @@
+export type CameraState =
+  | "IDLE"
+  | "REQUESTING"
+  | "DENIED"
+  | "INITIALIZING"
+  | "ACTIVE"
+  | "NO_FACE"
+  | "MULTIPLE_FACES"
+  | "TRACKING"
+  | "TRACKING_LOST"
+  | "STOPPED"
+  | "DEVICE_UNAVAILABLE"
+  | "ERROR";
+
+export type CameraErrorCode =
+  | "PERMISSION_DENIED"
+  | "NO_DEVICE"
+  | "DEVICE_BUSY"
+  | "CONSTRAINT_UNSATISFIABLE"
+  | "INSECURE_CONTEXT"
+  | "UNKNOWN";
