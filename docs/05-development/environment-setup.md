@@ -90,6 +90,7 @@ At the time of writing (2026-11-18):
 
 - Git is initialized locally; no remote yet (TASK-085).
 - `package.json` exists with pinned versions; `node_modules` is ignored.
-- Scaffold only: `index.html`, `src/main.tsx`, `src/App.tsx`, `vite.config.ts`, `tsconfig.json`.
+- Scaffold plus Tailwind: `index.html`, `src/main.tsx`, `src/App.tsx`, `src/styles/index.css`,
+  `vite.config.ts`, `tsconfig.json`.
 - No camera, tracking, rendering, or UI feature code exists.
-- No test runner, linter, or CSS framework is configured yet (TASK-022, TASK-023, TASK-024).
+- No test runner or linter is configured yet (TASK-023, TASK-024).

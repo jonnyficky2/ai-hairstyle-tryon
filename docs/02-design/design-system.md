@@ -1,7 +1,7 @@
 # Design System
 
-> Status: PROPOSED · Last updated: 2026-11-09
-> Tokens below are proposals, not approved brand assets. Implementation task: TASK-022.
+> Status: PROPOSED · Last updated: 2026-11-18
+> Token values are proposals, not approved brand assets. Token implementation: TASK-022 (DONE).
 
 ## 1. Principles
 
@@ -80,7 +80,13 @@ Reduced-motion mode removes non-essential transitions.
 
 - Tokens are defined as CSS custom properties and exposed to Tailwind theme variables.
 - Components use token classes, not raw hex values.
-- Tailwind v4 CSS-first configuration is the proposed default; confirm during TASK-022.
+- Tailwind v4 CSS-first configuration is confirmed (TASK-022): the `@theme` block in
+  `src/styles/index.css` is the only place raw values are declared. Namespace mapping is
+  `--color-*` → `bg-*` / `text-*` / `border-*`, `--text-*` → `text-*`, `--radius-*` → `rounded-*`,
+  `--shadow-*` → `shadow-*`, `--ease-*` → `ease-*`, `--font-*` → `font-*`.
+- `--duration-fast` and `--duration-base` are plain `:root` variables: Tailwind v4 has no
+  `--duration-*` theme namespace, so they are consumed with `var(...)` in component CSS or
+  arbitrary values.
 - No component library is adopted in the MVP unless a later ADR approves it.
 
 ## 8. Iconography

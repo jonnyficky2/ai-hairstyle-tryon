@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Design tokens — single source of raw values. See docs/02-design/design-system.md. */
+@theme {
+  --color-bg: #0b0d10;
+  --color-surface: #14171c;
+  --color-surface-raised: #1c2027;
+  --color-border: #2a2f38;
+  --color-text: #f2f4f7;
+  --color-text-muted: #a0a8b4;
+  --color-accent: #7c9cff;
+  --color-accent-contrast: #0b0d10;
+  --color-success: #3ddc97;
+  --color-warning: #f5b544;
+  --color-danger: #ff6b6b;
+
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.75rem;
+  --text-xl--line-height: 2.25rem;
+  --text-2xl: 2.5rem;
+  --text-2xl--line-height: 3rem;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-panel: 0 8px 32px rgb(0 0 0 / 0.35);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* No --duration-* namespace in Tailwind v4, so these stay plain variables. */
+:root {
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}

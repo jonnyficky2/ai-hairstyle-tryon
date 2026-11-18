@@ -7,6 +7,7 @@ exist. Format loosely follows Keep a Changelog.
 
 ### Added
 - Phase 1 scaffold: Vite 8.3.8, React 19.3.1, TypeScript 7.0.2 (strict), `.gitignore`.
+- Tailwind 4.3.5 + `@tailwindcss/vite` 4.3.5 with design tokens in `src/styles/index.css`.
 - `docs/07-security/privacy-notice-copy.md` — approved privacy and consent copy.
 - TASK-085 (connect git remote) and TASK-086 (picomatch advisory tracking).
 
@@ -16,6 +17,7 @@ exist. Format loosely follows Keep a Changelog.
 - Decision log P-001…P-010 resolved except asset sourcing and model licence.
 - TASK-020 scope reduced to local repository init; remote split to TASK-085.
 - Vite pin corrected from 8.3.6 to 8.3.8.
+- Design system §7 and stack evaluation §7 record the confirmed Tailwind v4 mapping (D-021).
 
 ### Added (documentation baseline)
 - Complete documentation system under `docs/00-project-overview` … `docs/09-project-history`.

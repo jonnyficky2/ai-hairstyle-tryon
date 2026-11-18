@@ -16,6 +16,7 @@ pinned and re-verified at implementation time.
 | `vite` | 8.3.8 | MIT | `node ^20.19.0 \|\| >=22.12.0` | 2.4 MB |
 | `typescript` | 7.0.2 | Apache-2.0 | `node >=16.20.0` | 2.5 MB |
 | `tailwindcss` | 4.3.5 | MIT | not declared | 787 KB |
+| `@tailwindcss/vite` | 4.3.5 | MIT | not declared (peer `vite ^5.2.0 \|\| ^6 \|\| ^7 \|\| ^8`) | 12 KB |
 | `vitest` | 5.1.0 | MIT | `node ^22.12.0 \|\| ^24.0.0 \|\| >=26.0.0` | 2.9 MB |
 | `@playwright/test` | 1.65.0 | Apache-2.0 | `node >=20` | 28.5 KB |
 
@@ -130,7 +131,7 @@ outside React render cycles to avoid jank.
 
 **Why considered.** Fast dev server, native TS/ESM, simple static build output.
 
-**Verified constraint.** Vite 8.3.6 requires Node `^20.19.0 || >=22.12.0`.
+**Verified constraint.** Vite 8.3.8 requires Node `^20.19.0 || >=22.12.0`.
 
 **Alternatives.** Parcel, Webpack, Rspack. Vite is sufficient and simpler for a static SPA.
 
@@ -138,10 +139,16 @@ outside React render cycles to avoid jank.
 
 **Why considered.** Token-driven utility styling, small runtime, fast iteration.
 
-**Verified.** Tailwind 4.3.5, MIT. v4 uses CSS-first configuration; confirm exact setup during
-TASK-022.
+**Verified.** Tailwind 4.3.5, MIT. v4 uses CSS-first configuration.
 
-**Alternatives.** CSS Modules, vanilla-extract, styled-components. Tailwind is a proposal.
+**Implementation result (TASK-022, 2026-11-18).** Installed `tailwindcss` + `@tailwindcss/vite`
+both at 4.3.5 (the Vite plugin peer-accepts Vite 8). Tokens are declared in `@theme` in
+`src/styles/index.css`; the build emits them as CSS custom properties plus matching utilities.
+Two constraints found in the official theme docs: there is no `--duration-*` theme namespace, so
+`--duration-fast`/`--duration-base` stay plain `:root` variables, and utility names come from the
+namespace (`--color-*` → `bg-*`/`text-*`/`border-*`).
+
+**Alternatives.** CSS Modules, vanilla-extract, styled-components. Tailwind is adopted for the MVP.
 
 ## 8. Testing — Vitest + Playwright
 

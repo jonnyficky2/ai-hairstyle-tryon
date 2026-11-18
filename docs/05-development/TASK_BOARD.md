@@ -1,6 +1,6 @@
 # TASK BOARD
 
-> **Authoritative execution tracker.** Last updated: 2026-11-09.
+> **Authoritative execution tracker.** Last updated: 2026-11-18.
 > Detail lives here; do not create a second task list elsewhere.
 > Status changes require evidence recorded in the task entry.
 
@@ -25,22 +25,22 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 18 |
-| TODO | 49 |
+| DONE | 19 |
+| TODO | 48 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
 | P1 tasks | 16 |
-| Overall completion | 25% (18/71) |
+| Overall completion | 27% (19/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027, 085 | 2/9 | 22% | IN_PROGRESS |
+| M1 | Project Foundation | TASK-020…027, 085 | 3/9 | 33% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 0/4 | 0% | TODO |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020, TASK-021 |
-| TODO | TASK-022…027, 030…033, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…022 |
+| TODO | TASK-023…027, 030…033, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -243,12 +243,13 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - Note: port 5173 is occupied by another local project, so `npm run dev` falls through to 5174. Use `npx vite --port <n> --strictPort` when a fixed port matters.
 
 ### TASK-022 — Configure Tailwind CSS and design tokens
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-021
 - Description: Install and configure Tailwind; define token variables from the design system.
 - Acceptance: Tokens available as classes/variables; no raw hex in components.
 - Verification: Build passes; visual token sample.
-- Evidence: Config files; screenshot.
+- Evidence: `tailwindcss` + `@tailwindcss/vite` 4.3.5 in `package.json`, plugin wired in `vite.config.ts`, `@theme` token block in `src/styles/index.css`, token-only classes in `src/App.tsx`. `npx tsc --noEmit` exit 0; `npm run build` → `dist/assets/index-6NP9oSDn.css` 10.36 kB (gzip 2.78 kB), JS 220.16 kB. Emitted CSS contains `--color-bg:#0b0d10`, `--color-accent:#7c9cff`, `--radius-lg:20px`, `--shadow-panel:`, `--ease-standard:`, `:root{--duration-fast:.12s;--duration-base:.2s}` and the utilities `.bg-bg`, `.bg-surface`, `.text-text-muted`, `.border-border`, `.rounded-lg`, `.text-2xl`. Screenshot: `docs/02-design/evidence/task-022-token-sample.png` (headless Chrome, 900×600, served with `vite preview`).
+- Note: Tailwind v4 has no `--duration-*` theme namespace, so the two durations stay plain `:root` variables (design-system §7).
 
 ### TASK-023 — Configure ESLint and Prettier
 - Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: S
