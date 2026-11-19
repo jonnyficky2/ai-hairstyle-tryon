@@ -52,6 +52,7 @@ Related records: `docs/03-architecture/adr/README.md` (approval record),
 | D-020 | 2026-11-18 | Do not downgrade Vite to silence the picomatch advisory; track it as TASK-086. | ACCEPTED | Security requirements §10 |
 | D-021 | 2026-11-18 | Styling: Tailwind 4.3.5 with `@tailwindcss/vite` 4.3.5, CSS-first `@theme` tokens; animation durations stay plain `:root` variables because v4 has no `--duration-*` namespace. | ACCEPTED | Stack evaluation §7, design system §7 |
 | D-022 | 2026-11-19 | `CameraService` manages only the `MediaStream` and goes `REQUESTING → ACTIVE` directly; `INITIALIZING` moves to the video/face-tracking layer (TASK-041/045). No `camera-service.ts` change. | ACCEPTED (owner) | `camera-pipeline.md` §3 |
+| D-023 | 2026-11-19 | TypeScript side-by-side: `typescript` aliases `@typescript/typescript6` 6.0.2 for typescript-eslint; `@typescript/native` aliases `typescript` 7.0.2 so `tsc` remains 7.0.2. | ACCEPTED (internal) | Stack evaluation §6, TASK-023 |
 
 ## 3. Decision process
 

@@ -19,6 +19,12 @@ pinned and re-verified at implementation time.
 | `@tailwindcss/vite` | 4.3.5 | MIT | not declared (peer `vite ^5.2.0 \|\| ^6 \|\| ^7 \|\| ^8`) | 12 KB |
 | `vitest` | 5.1.0 | MIT | `node ^22.12.0 \|\| ^24.0.0 \|\| >=26.0.0` | 2.9 MB |
 | `@playwright/test` | 1.65.0 | Apache-2.0 | `node >=20` | 28.5 KB |
+| `eslint` | 10.15.0 | MIT | `node ^20.19.0 \|\| ^22.13.0 \|\| >=24` | not checked |
+| `@eslint/js` | 10.0.1 | MIT | peer `eslint ^10.0.0` | not checked |
+| `typescript-eslint` | 8.73.0 | MIT | peer `eslint ^8.57 \|\| ^9 \|\| ^10`, `typescript >=4.8.4 <6.1.0` | not checked |
+| `prettier` | 3.10.1 | MIT | `node >=14` | not checked |
+| `@typescript/typescript6` | 6.0.2 | Apache-2.0 | not declared | not checked |
+| `@typescript/native` | alias of `typescript` 7.0.2 | Apache-2.0 | see `typescript` | not checked |
 
 **Practical Node baseline:** Node.js 22.12 or newer satisfies Vite and Vitest simultaneously.
 
@@ -134,6 +140,15 @@ outside React render cycles to avoid jank.
 **Verified constraint.** Vite 8.3.8 requires Node `^20.19.0 || >=22.12.0`.
 
 **Alternatives.** Parcel, Webpack, Rspack. Vite is sufficient and simpler for a static SPA.
+
+**Lint/format tooling (TASK-023, 2026-11-19).** ESLint 10.15.0, `@eslint/js` 10.0.1,
+`typescript-eslint` 8.73.0 and Prettier 3.10.1 are pinned. TypeScript 7 ships no programmatic API,
+so the official side-by-side aliases from the TS 7 announcement are used (D-023): `typescript`
+aliases `@typescript/typescript6` 6.0.2 for tool APIs, while `@typescript/native` aliases
+`typescript` 7.0.2 so `npx tsc --version` stays 7.0.2. `npm install` warns about an optional
+`@typescript/native` peer range (`>=7.1` dev) from `typescript-estree`; despite the warning,
+`npm run lint` and `npm run typecheck` both pass. Prettier uses project defaults; `.prettierignore`
+excludes docs, build output and the lockfile.
 
 ## 7. Styling — Tailwind CSS
 

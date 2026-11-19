@@ -25,22 +25,22 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 24 |
-| TODO | 43 |
+| DONE | 25 |
+| TODO | 42 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
 | P1 tasks | 15 |
-| Overall completion | 34% (24/71) |
+| Overall completion | 35% (25/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027, 085 | 4/9 | 44% | IN_PROGRESS |
+| M1 | Project Foundation | TASK-020…027, 085 | 5/9 | 56% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 4/4 | 100% | DONE |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…022, TASK-024, TASK-030…033 |
-| TODO | TASK-023, 025…027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…024, TASK-030…033 |
+| TODO | TASK-025…027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -252,12 +252,19 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - Note: Tailwind v4 has no `--duration-*` theme namespace, so the two durations stay plain `:root` variables (design-system §7).
 
 ### TASK-023 — Configure ESLint and Prettier
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: S
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: S
 - Dependencies: TASK-021
 - Description: Add linting and formatting with TypeScript rules.
 - Acceptance: `lint` and `format:check` pass on the scaffold.
 - Verification: Command output.
-- Evidence: Config files; command output.
+- Evidence: `eslint.config.js`, `.prettierignore`, `lint` / `format` / `format:check` scripts in
+  `package.json`. `npm run lint` → exit 0 with zero warnings; `npm run format:check` → "All matched
+  files use Prettier code style!"; `npm run typecheck` exit 0; `npm test` → 16 passed; `npm run build`
+  exit 0; `npm run test:e2e` → 1 passed. `npx tsc --version` → 7.0.2 after the side-by-side alias.
+- Note: TypeScript 7 has no API for typescript-eslint, so `typescript` is aliased to
+  `@typescript/typescript6` 6.0.2 for ESLint while `@typescript/native` alias keeps `tsc` at 7.0.2
+  (D-023). `.prettierignore` excludes `docs/`, `AGENTS.md`, `README.md`, lockfile and build output;
+  reformatting the 35 documentation files was out of scope.
 
 ### TASK-024 — Configure Vitest and Playwright
 - Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: M
@@ -707,5 +714,5 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - No dependency points to a higher-numbered task except none; the graph is acyclic.
 - Blocked tasks: TASK-015 (no sourcing decision), TASK-051 (depends on TASK-015),
   TASK-085 (no remote chosen), TASK-086 (upstream advisory unfixed).
-- Independent work that can start now: TASK-023, TASK-025, then TASK-040.
+- Independent work that can start now: TASK-025, then TASK-040.
 - Verification of completion is by evidence, not by checkbox.

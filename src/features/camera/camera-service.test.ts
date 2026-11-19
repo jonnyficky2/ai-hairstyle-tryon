@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CameraError, CameraService, type MediaDevicesLike } from "./camera-service";
+import {
+  CameraError,
+  CameraService,
+  type MediaDevicesLike,
+} from "./camera-service";
 import type { CameraErrorCode, CameraState } from "./camera-state";
 
 // INITIALIZING, NO_FACE, MULTIPLE_FACES, TRACKING and TRACKING_LOST are produced by the
@@ -7,7 +11,10 @@ import type { CameraErrorCode, CameraState } from "./camera-state";
 
 function fakeStream(trackCount = 1) {
   const tracks = Array.from({ length: trackCount }, () => ({ stop: vi.fn() }));
-  return { stream: { getTracks: () => tracks } as unknown as MediaStream, tracks };
+  return {
+    stream: { getTracks: () => tracks } as unknown as MediaStream,
+    tracks,
+  };
 }
 
 function namedError(name: string): Error {
@@ -33,7 +40,9 @@ afterEach(() => {
 
 describe("CameraService state machine (TC-02…TC-06, AC-13, AC-15, AC-18)", () => {
   it("starts in IDLE", () => {
-    expect(makeService(async () => fakeStream().stream).getState()).toBe("IDLE");
+    expect(makeService(async () => fakeStream().stream).getState()).toBe(
+      "IDLE",
+    );
   });
 
   it("moves IDLE → REQUESTING → ACTIVE and returns the stream", async () => {
@@ -71,21 +80,26 @@ describe("CameraService state machine (TC-02…TC-06, AC-13, AC-15, AC-18)", () 
     ["NotReadableError", "DEVICE_BUSY", "DEVICE_UNAVAILABLE"],
     ["OverconstrainedError", "CONSTRAINT_UNSATISFIABLE", "ERROR"],
     ["AbortError", "UNKNOWN", "ERROR"],
-  ] as const)("maps %s to %s / %s", async (name, code: CameraErrorCode, state: CameraState) => {
-    const service = makeService(async () => {
-      throw namedError(name);
-    });
+  ] as const)(
+    "maps %s to %s / %s",
+    async (name, code: CameraErrorCode, state: CameraState) => {
+      const service = makeService(async () => {
+        throw namedError(name);
+      });
 
-    await expect(service.start()).rejects.toMatchObject({ code });
-    expect(service.getState()).toBe(state);
-  });
+      await expect(service.start()).rejects.toMatchObject({ code });
+      expect(service.getState()).toBe(state);
+    },
+  );
 
   it("maps an insecure context to INSECURE_CONTEXT / ERROR", async () => {
     vi.stubGlobal("navigator", {});
     const getUserMedia = vi.fn(async () => fakeStream().stream);
     const service = makeService(getUserMedia);
 
-    await expect(service.start()).rejects.toMatchObject({ code: "INSECURE_CONTEXT" });
+    await expect(service.start()).rejects.toMatchObject({
+      code: "INSECURE_CONTEXT",
+    });
     expect(service.getState()).toBe("ERROR");
     expect(getUserMedia).not.toHaveBeenCalled();
   });
@@ -138,7 +152,9 @@ describe("CameraService state machine (TC-02…TC-06, AC-13, AC-15, AC-18)", () 
       return stream;
     });
 
-    await expect(service.start()).rejects.toMatchObject({ code: "PERMISSION_DENIED" });
+    await expect(service.start()).rejects.toMatchObject({
+      code: "PERMISSION_DENIED",
+    });
     expect(service.getState()).toBe("DENIED");
     await expect(service.start()).resolves.toBe(stream);
     expect(service.getState()).toBe("ACTIVE");
@@ -147,7 +163,10 @@ describe("CameraService state machine (TC-02…TC-06, AC-13, AC-15, AC-18)", () 
   it("delegates device listing to the injected mediaDevices", async () => {
     const devices: MediaDeviceInfo[] = [];
     const enumerateDevices = vi.fn(async () => devices);
-    const service = makeService(async () => fakeStream().stream, enumerateDevices);
+    const service = makeService(
+      async () => fakeStream().stream,
+      enumerateDevices,
+    );
 
     await expect(service.listDevices()).resolves.toBe(devices);
     expect(enumerateDevices).toHaveBeenCalledOnce();
@@ -157,7 +176,9 @@ describe("CameraService state machine (TC-02…TC-06, AC-13, AC-15, AC-18)", () 
     const { stream } = fakeStream();
     const getUserMedia = vi.fn(async () => stream);
     const enumerateDevices = vi.fn(async () => [] as MediaDeviceInfo[]);
-    vi.stubGlobal("navigator", { mediaDevices: { getUserMedia, enumerateDevices } });
+    vi.stubGlobal("navigator", {
+      mediaDevices: { getUserMedia, enumerateDevices },
+    });
     const service = new CameraService();
 
     await expect(service.start()).resolves.toBe(stream);

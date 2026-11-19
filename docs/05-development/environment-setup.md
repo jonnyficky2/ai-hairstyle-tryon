@@ -17,7 +17,8 @@ Node baseline verified from npm registry metadata on 2026-11-09.
 
 ## 2. Planned commands
 
-These commands do not work yet; they describe the intended project.
+Typecheck, lint, format, unit tests and build work locally; E2E additionally needs a local
+Playwright Chromium (`npx playwright install chromium`).
 
 ```bash
 # install
@@ -95,5 +96,6 @@ At the time of writing (2026-11-18):
 - Camera feature module started (Phase 2): `src/features/camera/` with `camera-state.ts`,
   `camera-service.ts`, `use-camera.ts`. Service-level implementation in progress (TASK-030);
   preview/UI wiring pending (TASK-031, TASK-032).
-- Test runner configured (TASK-024: Vitest 5.1.0, Playwright 1.65.0 with a local Chromium);
-  linter still pending (TASK-023).
+- Test runner (TASK-024: Vitest 5.1.0, Playwright 1.65.0 with a local Chromium) and lint/format
+  (TASK-023: ESLint 10.15.0, Prettier 3.10.1) are configured. TypeScript 7 is kept via the
+  `@typescript/native` alias; `typescript` points at `@typescript/typescript6` for ESLint (D-023).

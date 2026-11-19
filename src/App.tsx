@@ -44,19 +44,54 @@ export default function App() {
   return (
     <main className="min-h-dvh bg-bg p-6 text-text">
       <h1 className="text-2xl font-semibold">AI Hairstyle Try-On</h1>
-      <p className="mt-2 text-sm text-text-muted">Phase 2 — live camera preview scaffold.</p>
+      <p className="mt-2 text-sm text-text-muted">
+        Phase 2 — live camera preview scaffold.
+      </p>
       <div className="mt-6 rounded-lg border border-border bg-surface p-4 shadow-panel">
-        <video ref={videoRef} muted playsInline className="h-64 w-full rounded-lg bg-black" />
-        <canvas ref={canvasRef} className="mt-2 h-64 w-full rounded-lg bg-black" />
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          className="h-64 w-full rounded-lg bg-black"
+        />
+        <canvas
+          ref={canvasRef}
+          className="mt-2 h-64 w-full rounded-lg bg-black"
+        />
       </div>
-      {state === "REQUESTING" && <p className="mt-2 text-sm text-text-muted">Waiting for camera permission…</p>}
-      {state === "INITIALIZING" && <p className="mt-2 text-sm text-text-muted">Starting camera…</p>}
-      {state === "DENIED" && <p className="mt-2 text-sm text-text-muted">Camera permission denied. Enable camera access in your browser settings, then retry.</p>}
-      {state === "DEVICE_UNAVAILABLE" && <p className="mt-2 text-sm text-text-muted">No camera device available. Connect a webcam.</p>}
-      {state === "ERROR" && <p className="mt-2 text-sm text-text-muted">Camera error occurred. Retry or check your camera connection.</p>}
-      {state === "STOPPED" && <p className="mt-2 text-sm text-text-muted">Camera stopped.</p>}
+      {state === "REQUESTING" && (
+        <p className="mt-2 text-sm text-text-muted">
+          Waiting for camera permission…
+        </p>
+      )}
+      {state === "INITIALIZING" && (
+        <p className="mt-2 text-sm text-text-muted">Starting camera…</p>
+      )}
+      {state === "DENIED" && (
+        <p className="mt-2 text-sm text-text-muted">
+          Camera permission denied. Enable camera access in your browser
+          settings, then retry.
+        </p>
+      )}
+      {state === "DEVICE_UNAVAILABLE" && (
+        <p className="mt-2 text-sm text-text-muted">
+          No camera device available. Connect a webcam.
+        </p>
+      )}
+      {state === "ERROR" && (
+        <p className="mt-2 text-sm text-text-muted">
+          Camera error occurred. Retry or check your camera connection.
+        </p>
+      )}
+      {state === "STOPPED" && (
+        <p className="mt-2 text-sm text-text-muted">Camera stopped.</p>
+      )}
       <div className="mt-6 flex gap-2">
-        <button type="button" onClick={handleStart} disabled={starting || state === "ACTIVE"}>
+        <button
+          type="button"
+          onClick={handleStart}
+          disabled={starting || state === "ACTIVE"}
+        >
           Start camera
         </button>
         <button type="button" onClick={stop} disabled={state !== "ACTIVE"}>
@@ -65,7 +100,9 @@ export default function App() {
       </div>
       <div className="mt-6 rounded-lg border border-border bg-surface p-4 shadow-panel">
         <p className="text-xs text-text-muted">Design tokens</p>
-        <p className="mt-1 text-base">surface · border · radius-lg · shadow-panel</p>
+        <p className="mt-1 text-base">
+          surface · border · radius-lg · shadow-panel
+        </p>
       </div>
     </main>
   );

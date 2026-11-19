@@ -26,7 +26,8 @@ const DEFAULT_CONSTRAINTS: MediaStreamConstraints = {
 };
 
 const defaultMediaDevices: MediaDevicesLike = {
-  getUserMedia: (constraints) => navigator.mediaDevices.getUserMedia(constraints),
+  getUserMedia: (constraints) =>
+    navigator.mediaDevices.getUserMedia(constraints),
   enumerateDevices: () => navigator.mediaDevices.enumerateDevices(),
 };
 
@@ -43,7 +44,9 @@ export class CameraService {
     return this.state;
   }
 
-  async start(constraints: MediaStreamConstraints = DEFAULT_CONSTRAINTS): Promise<MediaStream> {
+  async start(
+    constraints: MediaStreamConstraints = DEFAULT_CONSTRAINTS,
+  ): Promise<MediaStream> {
     if (this.state === "ACTIVE" && this.stream) {
       return this.stream;
     }

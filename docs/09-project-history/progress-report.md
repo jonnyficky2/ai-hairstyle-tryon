@@ -20,18 +20,18 @@
 | Metric | Value |
 |---|---|
 | Tasks total | 71 |
-| Done | 21 |
-| In progress | 3 |
+| Done | 25 |
+| In progress | 0 |
 | Blocked | 4 |
 | Review | 0 |
-| To do | 43 |
-| Overall completion | 30% |
+| To do | 42 |
+| Overall completion | 35% |
 
 | Milestone | Completion |
 |---|---|
 | M0 Documentation & Research | 94% (16/17) |
-| M1 Project Foundation | 44% (4/9) |
-| M2 Camera System | 25% (1/4) |
+| M1 Project Foundation | 56% (5/9) |
+| M2 Camera System | 100% (4/4) |
 | M3 Face Detection & Tracking | 0% |
 | M4 Hairstyle Rendering | 0% |
 | M5 User Experience | 0% |
@@ -77,9 +77,8 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 
 ## 7. Next actions
 
-1. TASK-023 (ESLint + Prettier), TASK-025 (folder architecture); TASK-024 and TASK-033 are DONE.
-2. TASK-026 (app shell), then TASK-027 (CI). Manual camera UAT is still needed to close
-   TASK-030/031/032.
+1. TASK-025 (folder architecture); TASK-023, TASK-024 and TASK-033 are DONE.
+2. TASK-026 (app shell), then TASK-027 (CI). TASK-030/031/032 were closed on owner-reported UAT.
 3. Decide asset sourcing (TASK-015) before Phase 4.
 4. Choose a git remote (TASK-085).
 
@@ -219,8 +218,29 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
   - `npm run build` → `dist/index.html` 0.40 kB, `dist/assets/index-DplKxRef.css` 10.54 kB
     (gzip 2.84 kB), `dist/assets/index-Cpiq5khJ.js` 223.74 kB (gzip 70.12 kB), built in 67 ms.
     CSS is back to the pre-test-file size (was 11.11 kB).
-- Remaining: TASK-023 (lint setup), TASK-025 (folder structure), TASK-026 (app shell), then CI.
+- Remaining: TASK-025 (folder structure), TASK-026 (app shell), then CI.
 - Blockers: unchanged (TASK-015, TASK-085, TASK-086, P-009).
 - Assumptions: the manual UAT pass is owner-reported; no screenshots or recording were supplied,
   so those artifacts are absent from the evidence.
+- Files modified but not verified: none.
+
+### 2026-11-19 — Lint and formatting (TASK-023)
+
+- Task: TASK-023.
+- Completed: ESLint 10.15.0 + `@eslint/js` 10.0.1 + `typescript-eslint` 8.73.0 and Prettier 3.10.1
+  installed and pinned. Added `eslint.config.js`, `.prettierignore`, and `lint` / `format` /
+  `format:check` scripts. TypeScript 7 side-by-side aliases adopted (D-023). Prettier reformatted
+  only code/config files; the 35 documentation files remain untouched.
+- Commands run and real results:
+  - `npm install` → 0 vulnerabilities; one npm warning about typescript-estree's optional
+    `@typescript/native` peer range (`>=7.1` dev).
+  - `npx tsc --version` → 7.0.2 (unchanged after aliasing).
+  - `npm run lint` → exit 0, zero warnings.
+  - `npm run format` → reformatted 5 files; `npm run format:check` → "All matched files use
+    Prettier code style!"
+  - `npm run typecheck` → exit 0; `npm test` → 16 passed (75 ms); `npm run build` → CSS 10.54 kB,
+    JS 223.74 kB (78 ms); `npm run test:e2e` → 1 passed (979 ms).
+- Remaining: TASK-025 (folder structure), TASK-026 (app shell), TASK-027 (CI).
+- Blockers: unchanged (TASK-015, TASK-085, TASK-086, P-009).
+- Assumptions: none new. The npm peer warning is non-blocking; lint and typecheck both pass.
 - Files modified but not verified: none.
