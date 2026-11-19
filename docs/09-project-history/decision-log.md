@@ -1,6 +1,6 @@
 # Decision Log
 
-> Status: Living document · Last updated: 2026-11-09
+> Status: Living document · Last updated: 2026-11-19
 > ADRs are the detailed record; this log is the chronological index.
 
 ## 1. Decisions recorded
@@ -51,6 +51,7 @@ Related records: `docs/03-architecture/adr/README.md` (approval record),
 | D-019 | 2026-11-18 | Split TASK-020: local repository init is DONE; remote connection moved to TASK-085. | ACCEPTED | TASK_BOARD.md |
 | D-020 | 2026-11-18 | Do not downgrade Vite to silence the picomatch advisory; track it as TASK-086. | ACCEPTED | Security requirements §10 |
 | D-021 | 2026-11-18 | Styling: Tailwind 4.3.5 with `@tailwindcss/vite` 4.3.5, CSS-first `@theme` tokens; animation durations stay plain `:root` variables because v4 has no `--duration-*` namespace. | ACCEPTED | Stack evaluation §7, design system §7 |
+| D-022 | 2026-11-19 | `CameraService` manages only the `MediaStream` and goes `REQUESTING → ACTIVE` directly; `INITIALIZING` moves to the video/face-tracking layer (TASK-041/045). No `camera-service.ts` change. | ACCEPTED (owner) | `camera-pipeline.md` §3 |
 
 ## 3. Decision process
 

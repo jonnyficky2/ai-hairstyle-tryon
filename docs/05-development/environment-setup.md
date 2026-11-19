@@ -95,4 +95,5 @@ At the time of writing (2026-11-18):
 - Camera feature module started (Phase 2): `src/features/camera/` with `camera-state.ts`,
   `camera-service.ts`, `use-camera.ts`. Service-level implementation in progress (TASK-030);
   preview/UI wiring pending (TASK-031, TASK-032).
-- No test runner or linter is configured yet (TASK-023, TASK-024).
+- Test runner configured (TASK-024: Vitest 5.1.0, Playwright 1.65.0 with a local Chromium);
+  linter still pending (TASK-023).

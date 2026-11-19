@@ -148,6 +148,11 @@ Two constraints found in the official theme docs: there is no `--duration-*` the
 `--duration-fast`/`--duration-base` stay plain `:root` variables, and utility names come from the
 namespace (`--color-*` → `bg-*`/`text-*`/`border-*`).
 
+**Source scanning (2026-11-19).** `@source not "../**/*.test.*"`, `@source not "../**/*.spec.*"`
+and `@source not "../../e2e"` were added to `src/styles/index.css`. Tailwind v4 treats every
+non-ignored file as plain text, so test descriptions were generating unused utilities. After the
+exclusion the CSS build returned from 11.11 kB to 10.54 kB (`index-DplKxRef.css`).
+
 **Alternatives.** CSS Modules, vanilla-extract, styled-components. Tailwind is adopted for the MVP.
 
 ## 8. Testing — Vitest + Playwright
@@ -161,6 +166,17 @@ mandatory.
 
 **Limitations.** Playwright can fake media streams with launch flags, but that does not prove real
 camera behavior or tracking quality.
+
+**Implementation result (TASK-024, 2026-11-19).** `vitest` 5.1.0 and `@playwright/test` 1.65.0 are
+installed and pinned. `vitest.config.ts` limits discovery to `src/**/*.test.ts` so Playwright specs
+are not picked up by Vitest; `playwright.config.ts` starts the Vite dev server bound to 127.0.0.1
+and runs `e2e/*.spec.ts`. One smoke test per runner passes. `npm audit` now reports 0 vulnerabilities;
+TASK-086 still needs re-verification before closure.
+
+**Coverage provider (TASK-033, 2026-11-19).** `@vitest/coverage-v8` 5.1.0 (MIT, no engines declared)
+was checked with `npm view` and pinned to the exact Vitest version; V8 is used instead of Istanbul
+because it needs no source transform. Coverage is reported for the camera service only; enforcing a
+threshold belongs to TASK-070.
 
 ## 9. Storage — localStorage
 

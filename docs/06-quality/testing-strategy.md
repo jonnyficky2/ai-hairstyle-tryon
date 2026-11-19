@@ -1,7 +1,8 @@
 # Testing Strategy
 
 > Status: PROPOSED · Last updated: 2026-11-09
-> Tooling: Vitest + Playwright. Manual UAT is mandatory for vision and camera behavior.
+> Tooling: Vitest + Playwright, configured 2026-11-19 (TASK-024). Manual UAT is mandatory for vision
+> and camera behavior.
 
 ## 1. Test pyramid
 

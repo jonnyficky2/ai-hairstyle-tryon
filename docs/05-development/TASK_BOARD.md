@@ -1,6 +1,6 @@
 # TASK BOARD
 
-> **Authoritative execution tracker.** Last updated: 2026-11-18.
+> **Authoritative execution tracker.** Last updated: 2026-11-19.
 > Detail lives here; do not create a second task list elsewhere.
 > Status changes require evidence recorded in the task entry.
 
@@ -25,23 +25,23 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 19 |
-| TODO | 48 |
+| DONE | 24 |
+| TODO | 43 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
-| P1 tasks | 16 |
-| Overall completion | 27% (19/71) |
+| P1 tasks | 15 |
+| Overall completion | 34% (24/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027, 085 | 3/9 | 33% | IN_PROGRESS |
-| M2 | Camera System | TASK-030…033 | 0/4 | 0% | TODO |
+| M1 | Project Foundation | TASK-020…027, 085 | 4/9 | 44% | IN_PROGRESS |
+| M2 | Camera System | TASK-030…033 | 4/4 | 100% | DONE |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
 | M5 | User Experience | TASK-060…068 | 0/9 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…022 |
-| TODO | TASK-023…027, 030…033, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…022, TASK-024, TASK-030…033 |
+| TODO | TASK-023, 025…027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -260,12 +260,18 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - Evidence: Config files; command output.
 
 ### TASK-024 — Configure Vitest and Playwright
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-021
 - Description: Add unit and E2E test runners with one passing smoke test each.
 - Acceptance: `test` and `test:e2e` run; smoke tests pass.
 - Verification: Command output.
-- Evidence: Config files; test output.
+- Evidence: `vitest.config.ts`, `playwright.config.ts`, `src/features/camera/camera-service.test.ts`,
+  `e2e/smoke.spec.ts`; `vitest` 5.1.0 and `@playwright/test` 1.65.0 pinned in `package.json`.
+  `npm run typecheck` exit 0; `npm test` → 1 file / 1 test passed (66 ms); `npm run build` →
+  `dist/index.html` 0.40 kB, `index-DplKxRef.css` 10.54 kB, `index-Cpiq5khJ.js` 223.74 kB (75 ms);
+  `npm run test:e2e` → 1 passed (3.3 s) on Chromium. Playwright webServer binds the dev server to
+  127.0.0.1; without `--host 127.0.0.1` startup timed out. `npm audit` now reports 0 vulnerabilities
+  (TASK-086 still needs its own verification before closing).
 
 ### TASK-025 — Create source folder architecture
 - Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: S
@@ -294,44 +300,53 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 ## Phase 2 — Camera System (M2)
 
 ### TASK-030 — Implement camera permission and lifecycle service
-- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **IN_PROGRESS** · Complexity: L
+- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **DONE** · Complexity: L
 - Dependencies: TASK-026
 - Description: Implement start, stop, device listing, typed errors, and state transitions.
 - Acceptance: AC-01, AC-15; all documented error codes mapped.
 - Verification: Unit tests with injected media devices; manual permission tests.
-- Evidence: Test output; manual state screenshots.
-- Note (2026-11-18): Implementation started — `src/features/camera/` created (`camera-state.ts`,
-  `camera-service.ts`, `use-camera.ts`) per approved component architecture. Typecheck and build pass.
-  Unit tests and manual camera permission UAT still pending (no test runner configured yet — TASK-024).
+- Evidence: `src/features/camera/camera-service.ts`; 16 unit tests pass with 100% coverage of the
+  service (TASK-033). Owner reported manual permission/lifecycle UAT passed in a real browser on
+  2026-11-19. No screenshot files were supplied; the UAT result is owner-reported, not re-run by
+  the agent.
+- Note (2026-11-18): implementation created `src/features/camera/` (`camera-state.ts`,
+  `camera-service.ts`, `use-camera.ts`) per the approved component architecture.
 
 ### TASK-031 — Implement video preview and device selection
-- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **IN_PROGRESS** · Complexity: M
+- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-030
 - Description: Render the stream to a video element and canvas; support front/back selection if P1 is kept.
 - Acceptance: Live preview visible; device switch does not leak tracks.
 - Verification: Manual + unit test for track stop.
-- Evidence: Recording; test output.
-- Note (2026-11-18): Implementation started — stream rendered to `<video>` + `<canvas>` via
-  `useCamera()` and rAF draw loop in `src/App.tsx`. Front/back device switch still pending;
-  typecheck + build pass. Manual preview verification pending.
+- Evidence: `src/App.tsx` renders the stream to `<video>` + `<canvas>` via `useCamera()` with an rAF
+  draw loop; track stop is covered by TASK-033 unit tests. Owner reported manual preview UAT passed
+  in a real browser on 2026-11-19; no recording was supplied.
+- Note: front/back device switching was P1 and was not implemented; no track leak is introduced
+  because no switch path exists.
 
 ### TASK-032 — Implement camera error and permission states UI
-- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **IN_PROGRESS** · Complexity: M
+- Phase: 2 · Milestone: M2 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-030
 - Description: Build UI for REQUESTING, DENIED, INITIALIZING, DEVICE_UNAVAILABLE, STOPPED, ERROR.
 - Acceptance: AC-13, AC-18; every state has actionable copy.
 - Verification: Manual walkthrough of each state.
-- Evidence: Screenshots per state.
-- Note (2026-11-18): Implementation started — state-driven copy rendered in `src/App.tsx`.
-  Typecheck + build pass. Manual walkthrough of each state pending.
+- Evidence: state-driven copy in `src/App.tsx`; owner reported the manual state walkthrough passed
+  in a real browser on 2026-11-19. No per-state screenshots were supplied.
+- Note: after D-022, `INITIALIZING` is set by the video/tracking layer (TASK-041/045), so its UI
+  copy is present but not yet reachable from `CameraService`.
 
 ### TASK-033 — Add camera state machine unit tests
-- Phase: 2 · Milestone: M2 · Priority: P1 · Status: **TODO** · Complexity: M
+- Phase: 2 · Milestone: M2 · Priority: P1 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-030, TASK-032
 - Description: Test transitions, error mapping, retry, and cleanup.
 - Acceptance: All transitions covered; no unreachable state.
 - Verification: Coverage report.
-- Evidence: Test output.
+- Evidence: `src/features/camera/camera-service.test.ts`. `npm test -- --coverage` → 16 passed;
+  `camera-service.ts` 100% statements (47/47), branches (32/32), functions (11/11) and lines
+  (46/46); `npm run typecheck` exit 0; `npm run build` exit 0; `npm run test:e2e` → 1 passed.
+- Note: the earlier lifecycle mismatch was resolved by owner decision D-022 — `camera-pipeline.md`
+  §3 and `component-architecture.md` §2 now assign `INITIALIZING` and the four tracking states to
+  the video/tracking layer (TASK-041/045). `camera-service.ts` was not changed.
 
 ## Phase 3 — Face Detection & Tracking (M3)
 
@@ -692,5 +707,5 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - No dependency points to a higher-numbered task except none; the graph is acyclic.
 - Blocked tasks: TASK-015 (no sourcing decision), TASK-051 (depends on TASK-015),
   TASK-085 (no remote chosen), TASK-086 (upstream advisory unfixed).
-- Independent work that can start now: TASK-022, TASK-023, TASK-024, TASK-025, then TASK-040.
+- Independent work that can start now: TASK-023, TASK-025, then TASK-040.
 - Verification of completion is by evidence, not by checkbox.

@@ -31,15 +31,30 @@ These are proposals; validate on the device matrix.
 
 ## 3. Lifecycle
 
+`CameraService` owns only the `MediaStream`. Its state machine is:
+
 ```
 IDLE
   → (user consents + starts) → REQUESTING
-  → granted → INITIALIZING
-  → video metadata loaded + play() resolved → ACTIVE
-  → tracking started → NO_FACE | TRACKING
+  → getUserMedia resolved → ACTIVE
   → (user stops | route leaves | unmount) → STOPPED
   → (retry) → REQUESTING
 ```
+
+A rejection maps to `DENIED` / `DEVICE_UNAVAILABLE` / `ERROR` (§4); a retry from any of those
+returns to `REQUESTING`.
+
+`INITIALIZING` belongs to the video/face-tracking layer (TASK-041/045), not to `CameraService`:
+
+```
+ACTIVE (stream available)
+  → video metadata loading + model init → INITIALIZING
+  → metadata loaded + play() resolved + model ready → NO_FACE | TRACKING
+  → (stop) → STOPPED (tracks released by CameraService)
+```
+
+Owner decision D-022 (2026-11-19): `camera-service.ts` is unchanged; this section is the revised
+source of truth for state ownership.
 
 ## 4. Error mapping
 

@@ -30,6 +30,8 @@ type CameraState =
   | "IDLE" | "REQUESTING" | "DENIED" | "INITIALIZING" | "ACTIVE"
   | "NO_FACE" | "MULTIPLE_FACES" | "TRACKING" | "TRACKING_LOST"
   | "STOPPED" | "DEVICE_UNAVAILABLE" | "ERROR";
+// CameraService owns IDLE/REQUESTING/ACTIVE/STOPPED/DENIED/DEVICE_UNAVAILABLE/ERROR.
+// The video/tracking layer (TASK-041/045) sets INITIALIZING and the four tracking states (D-022).
 
 type CameraErrorCode =
   | "PERMISSION_DENIED" | "NO_DEVICE" | "DEVICE_BUSY"

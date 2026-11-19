@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Test text is not UI source; scanning it emits unused utilities and bloats the bundle. */
+@source not "../**/*.test.*";
+@source not "../**/*.spec.*";
+@source not "../../e2e";
+
 /* Design tokens — single source of raw values. See docs/02-design/design-system.md. */
 @theme {
   --color-bg: #0b0d10;

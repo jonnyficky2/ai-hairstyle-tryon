@@ -39,6 +39,9 @@ The UI must have a distinct, testable representation for each state.
 | `DEVICE_UNAVAILABLE` | No camera or hardware failure | Explanation + retry |
 | `ERROR` | Unclassified failure | Error message with retry |
 
+`INITIALIZING` and the four tracking states are set by the video/face-tracking layer
+(TASK-041/045); `CameraService` only manages the stream (D-022, `camera-pipeline.md` §3).
+
 ## 3. Interaction rules
 
 - Changing hairstyle must never restart the camera.

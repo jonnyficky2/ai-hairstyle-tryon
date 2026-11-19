@@ -1,6 +1,6 @@
 # Progress Report
 
-> Status: Living document · Last updated: 2026-11-18
+> Status: Living document · Last updated: 2026-11-19
 > This is the project state summary. It must match `TASK_BOARD.md`.
 
 ## 1. Current state
@@ -9,7 +9,7 @@
 |---|---|
 | Phase | 1 — Project Foundation |
 | Milestone | M1 in progress |
-| Application code | Vite + React + TypeScript scaffold with Tailwind tokens; no camera, tracking, or rendering |
+| Application code | Vite + React + TypeScript scaffold with Tailwind tokens and a camera preview scaffold; no tracking or rendering |
 | Dependencies | Installed and pinned |
 | Git repository | Initialized locally; no remote |
 | Deployment | None |
@@ -20,18 +20,18 @@
 | Metric | Value |
 |---|---|
 | Tasks total | 71 |
-| Done | 19 |
-| In progress | 0 |
+| Done | 21 |
+| In progress | 3 |
 | Blocked | 4 |
 | Review | 0 |
-| To do | 48 |
-| Overall completion | 27% |
+| To do | 43 |
+| Overall completion | 30% |
 
 | Milestone | Completion |
 |---|---|
 | M0 Documentation & Research | 94% (16/17) |
-| M1 Project Foundation | 33% (3/9) |
-| M2 Camera System | 0% |
+| M1 Project Foundation | 44% (4/9) |
+| M2 Camera System | 25% (1/4) |
 | M3 Face Detection & Tracking | 0% |
 | M4 Hairstyle Rendering | 0% |
 | M5 User Experience | 0% |
@@ -77,8 +77,9 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 
 ## 7. Next actions
 
-1. TASK-023 (ESLint + Prettier), TASK-024 (Vitest + Playwright), TASK-025 (folder architecture).
-2. TASK-026 (app shell), then TASK-027 (CI).
+1. TASK-023 (ESLint + Prettier), TASK-025 (folder architecture); TASK-024 and TASK-033 are DONE.
+2. TASK-026 (app shell), then TASK-027 (CI). Manual camera UAT is still needed to close
+   TASK-030/031/032.
 3. Decide asset sourcing (TASK-015) before Phase 4.
 4. Choose a git remote (TASK-085).
 
@@ -151,4 +152,75 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 - Remaining: TASK-023…027 (lint, test runners, folders, shell, CI).
 - Blockers: unchanged (TASK-015, TASK-085, TASK-086, P-009).
 - Assumptions: token values remain proposals; no brand approval exists yet.
+- Files modified but not verified: none.
+
+### 2026-11-19 — Test runners (TASK-024)
+
+- Task: TASK-024.
+- Completed: installed and pinned Vitest 5.1.0 and @playwright/test 1.65.0; added `test` and
+  `test:e2e` scripts; added `vitest.config.ts`, `playwright.config.ts`, one unit smoke test
+  (`src/features/camera/camera-service.test.ts`) and one E2E smoke test (`e2e/smoke.spec.ts`).
+- Commands run and real results:
+  - `npm install -D --save-exact vitest@5.1.0 @playwright/test@1.65.0` → 19 packages added, audited
+    67, 0 vulnerabilities.
+  - `npx playwright install chromium` → Chromium 158.0.8127.18 (v1254), FFmpeg v1013 and headless
+    shell downloaded to the Playwright cache.
+  - `npm run typecheck` → exit 0.
+  - `npm test` → 1 test file / 1 test passed, 66 ms.
+  - `npm run build` → `dist/index.html` 0.40 kB, `dist/assets/index-DplKxRef.css` 10.54 kB,
+    `dist/assets/index-Cpiq5khJ.js` 223.74 kB (gzip 70.12 kB), built in 75 ms.
+  - `npm run test:e2e` → 1 passed (3.3 s) on Chromium. First run timed out waiting for the
+    webServer; fixed by binding the dev server with `--host 127.0.0.1`.
+- Remaining: TASK-023 (lint), TASK-025 (folders), TASK-026 (shell), TASK-033 (camera state tests).
+- Blockers: unchanged (TASK-015, TASK-085, TASK-086, P-009). Note: `npm audit` now reports 0
+  vulnerabilities, so TASK-086 needs re-verification before it can be closed.
+- Assumptions: none new.
+- Files modified but not verified: none.
+
+### 2026-11-19 — Camera state machine tests (TASK-033)
+
+- Task: TASK-033.
+- Completed: expanded `src/features/camera/camera-service.test.ts` from the TASK-024 smoke test to
+  16 cases covering IDLE → REQUESTING → ACTIVE, active-stream reuse, all five browser error mappings,
+  insecure context, `CameraError` passthrough, non-Error rejection, stop/track cleanup, retry and
+  device listing. Added `@vitest/coverage-v8` 5.1.0 (pinned, evaluated in the stack evaluation §8)
+  and a V8 coverage block in `vitest.config.ts` scoped to `camera-service.ts`.
+- Commands run and real results:
+  - `npm install -D --save-exact @vitest/coverage-v8@5.1.0` → 12 packages added, audited 79,
+    0 vulnerabilities.
+  - `npm run typecheck` → exit 0.
+  - `npm test -- --coverage` → 16 passed; `camera-service.ts` statements 100% (47/47), branches
+    100% (32/32), functions 100% (11/11), lines 100% (46/46).
+  - `npm run build` → `dist/index.html` 0.40 kB, `dist/assets/index-DsItyQPu.css` 11.11 kB,
+    `dist/assets/index-D3Mzq_gy.js` 223.74 kB (gzip 70.12 kB), built in 100 ms.
+  - `npm run test:e2e` → 1 passed (912 ms).
+- Remaining: manual camera UAT for TASK-030/031/032; TASK-023, TASK-025, TASK-026.
+- Adjacent finding (not fixed): the approved lifecycle (`camera-pipeline.md` §3) includes
+  `INITIALIZING`, but `CameraService` jumps `REQUESTING → ACTIVE`. The four tracking states are not
+  produced until TASK-041/045. Needs an owner decision; no spec or implementation was changed here.
+- Blockers: unchanged (TASK-015, TASK-085, TASK-086, P-009).
+- Assumptions: none new.
+- Files modified but not verified: none.
+
+### 2026-11-19 — Camera milestone closed (TASK-030…033, D-022)
+
+- Tasks: TASK-030, TASK-031, TASK-032 marked DONE from owner-reported manual browser UAT; TASK-033
+  already DONE. M2 is 4/4 (100%).
+- Completed:
+  - Owner decision D-022 recorded: `camera-pipeline.md` §3 now assigns `REQUESTING → ACTIVE` to
+    `CameraService` and moves `INITIALIZING` + the four tracking states to the video/tracking layer
+    (TASK-041/045). `component-architecture.md` §2 and `user-journey.md` updated for consistency.
+    `camera-service.ts` was not changed.
+  - Tailwind v4 `@source not` exclusions for `*.test.*`, `*.spec.*` and `e2e/` added to
+    `src/styles/index.css`.
+- Commands run and real results:
+  - `npm test` → 16 passed (60 ms).
+  - `npm run typecheck` → exit 0.
+  - `npm run build` → `dist/index.html` 0.40 kB, `dist/assets/index-DplKxRef.css` 10.54 kB
+    (gzip 2.84 kB), `dist/assets/index-Cpiq5khJ.js` 223.74 kB (gzip 70.12 kB), built in 67 ms.
+    CSS is back to the pre-test-file size (was 11.11 kB).
+- Remaining: TASK-023 (lint setup), TASK-025 (folder structure), TASK-026 (app shell), then CI.
+- Blockers: unchanged (TASK-015, TASK-085, TASK-086, P-009).
+- Assumptions: the manual UAT pass is owner-reported; no screenshots or recording were supplied,
+  so those artifacts are absent from the evidence.
 - Files modified but not verified: none.
