@@ -7,3 +7,4 @@ playwright-report
 *.local
 .env.local
 .DS_Store
+.uads/
