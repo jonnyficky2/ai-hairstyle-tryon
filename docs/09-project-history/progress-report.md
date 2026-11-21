@@ -25,7 +25,7 @@
 | Blocked | 4 |
 | Review | 0 |
 | To do | 42 |
-| Overall completion | 35% |
+| Overall completion | 37% |
 
 | Milestone | Completion |
 |---|---|
@@ -77,7 +77,7 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 
 ## 7. Next actions
 
-1. TASK-025 (folder architecture); TASK-023, TASK-024 and TASK-033 are DONE.
+1. TASK-026 (app shell), then TASK-027 (CI). TASK-030/031/032 were closed on owner-reported UAT.
 2. TASK-026 (app shell), then TASK-027 (CI). TASK-030/031/032 were closed on owner-reported UAT.
 3. Decide asset sourcing (TASK-015) before Phase 4.
 4. Choose a git remote (TASK-085).
@@ -95,6 +95,22 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 - Remaining: approvals (TASK-013, 014, 016, 017), asset sourcing (TASK-015).
 - Assumptions: see `docs/04-ai-research/ai-research.md`.
 - Files modified: documentation only.
+
+### 2026-11-21 — Folder architecture
+
+- Tasks: TASK-025.
+- Completed:
+  - Created source folder architecture (`src/` modular folders and `src/types/index.ts`).
+- Commands run and real results:
+  - `npm run typecheck` → exit 0.
+  - `npm test` → 16 passed.
+  - `npm run build` → exit 0.
+  - `git status --short` → clean.
+- Remaining: TASK-026 (app shell), then TASK-027 (CI).
+- Blockers: TASK-015 (asset sourcing), TASK-085 (no remote), TASK-086 (upstream advisory),
+  P-009 (model license).
+- Assumptions: none.
+- Files modified: `src/types/index.ts` created, folders created, `TASK_BOARD.md` and `progress-report.md` updated.
 
 ### 2026-11-18 — Phase 0 approvals closed, Phase 1 scaffold
 

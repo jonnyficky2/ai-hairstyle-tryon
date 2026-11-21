@@ -1,6 +1,6 @@
 # TASK BOARD
 
-> **Authoritative execution tracker.** Last updated: 2026-11-19.
+> **Authoritative execution tracker.** Last updated: 2026-11-21.
 > Detail lives here; do not create a second task list elsewhere.
 > Status changes require evidence recorded in the task entry.
 
@@ -25,22 +25,22 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 25 |
-| TODO | 42 |
+| DONE | 26 |
+| TODO | 41 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
 | P1 tasks | 15 |
-| Overall completion | 35% (25/71) |
+| Overall completion | 37% (26/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027, 085 | 5/9 | 56% | IN_PROGRESS |
+| M1 | Project Foundation | TASK-020…027, 085 | 6/9 | 67% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 4/4 | 100% | DONE |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…024, TASK-030…033 |
-| TODO | TASK-025…027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…025, TASK-030…033 |
+| TODO | TASK-026…027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -281,12 +281,12 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
   (TASK-086 still needs its own verification before closing).
 
 ### TASK-025 — Create source folder architecture
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: S
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: S
 - Dependencies: TASK-021
 - Description: Create the folder structure from the component architecture.
 - Acceptance: Folders exist; no empty placeholder modules beyond agreed structure.
 - Verification: Directory listing.
-- Evidence: Tree output.
+- Evidence: `src/` modular folders created (`app`, `components`, `features/face-tracking`, `features/renderer`, `features/hairstyle`, `features/snapshot`, `hooks`, `services`, `types`, `utils`); `src/types/index.ts` defined with initial shared contracts.
 
 ### TASK-026 — Build application shell and layout skeleton
 - Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
