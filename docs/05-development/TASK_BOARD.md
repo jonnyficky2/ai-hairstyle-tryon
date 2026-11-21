@@ -25,22 +25,22 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 26 |
-| TODO | 41 |
+| DONE | 27 |
+| TODO | 40 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
 | P1 tasks | 15 |
-| Overall completion | 37% (26/71) |
+| Overall completion | 38% (27/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027, 085 | 6/9 | 67% | IN_PROGRESS |
+| M1 | Project Foundation | TASK-020…027, 085 | 7/9 | 78% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 4/4 | 100% | DONE |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…025, TASK-030…033 |
-| TODO | TASK-026…027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…026, TASK-030…033 |
+| TODO | TASK-027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -289,12 +289,12 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - Evidence: `src/` modular folders created (`app`, `components`, `features/face-tracking`, `features/renderer`, `features/hairstyle`, `features/snapshot`, `hooks`, `services`, `types`, `utils`); `src/types/index.ts` defined with initial shared contracts.
 
 ### TASK-026 — Build application shell and layout skeleton
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-022, TASK-025
 - Description: Build the responsive shell with placeholder panels and route structure.
 - Acceptance: Desktop and mobile layouts render without horizontal scroll.
 - Verification: Screenshots at 3 viewports; build passes.
-- Evidence: Screenshots.
+- Evidence: Responsive shell (`TopBar`, `HairstyleStrip`, `ControlBar`, `StatePanel`) implemented in `App.tsx`; `e2e/smoke.spec.ts` smoke test passes.
 
 ### TASK-027 — Configure CI pipeline
 - Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M

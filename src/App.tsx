@@ -1,19 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { useCamera } from "./features/camera/use-camera";
+import { TopBar } from "./components/TopBar";
+import { HairstyleStrip } from "./components/HairstyleStrip";
+import { ControlBar } from "./components/ControlBar";
+import { StatePanel } from "./components/StatePanel";
 
 export default function App() {
   const { state, stream, start, stop } = useCamera();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [starting, setStarting] = useState(false);
+  const [selectedHairstyle, setSelectedHairstyle] = useState<string | null>("short-1");
 
   useEffect(() => {
     if (state !== "ACTIVE" || !stream) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
+
     video.srcObject = stream;
     void video.play();
+
     let raf = 0;
     const draw = () => {
       const v = videoRef.current;
@@ -41,69 +48,65 @@ export default function App() {
     }
   };
 
+  const handleSnapshot = () => {
+    alert("Snapshot functionality will be available in Phase 5!");
+  };
+
   return (
-    <main className="min-h-dvh bg-bg p-6 text-text">
-      <h1 className="text-2xl font-semibold">AI Hairstyle Try-On</h1>
-      <p className="mt-2 text-sm text-text-muted">
-        Phase 2 — live camera preview scaffold.
-      </p>
-      <div className="mt-6 rounded-lg border border-border bg-surface p-4 shadow-panel">
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          className="h-64 w-full rounded-lg bg-black"
-        />
-        <canvas
-          ref={canvasRef}
-          className="mt-2 h-64 w-full rounded-lg bg-black"
-        />
-      </div>
-      {state === "REQUESTING" && (
-        <p className="mt-2 text-sm text-text-muted">
-          Waiting for camera permission…
-        </p>
-      )}
-      {state === "INITIALIZING" && (
-        <p className="mt-2 text-sm text-text-muted">Starting camera…</p>
-      )}
-      {state === "DENIED" && (
-        <p className="mt-2 text-sm text-text-muted">
-          Camera permission denied. Enable camera access in your browser
-          settings, then retry.
-        </p>
-      )}
-      {state === "DEVICE_UNAVAILABLE" && (
-        <p className="mt-2 text-sm text-text-muted">
-          No camera device available. Connect a webcam.
-        </p>
-      )}
-      {state === "ERROR" && (
-        <p className="mt-2 text-sm text-text-muted">
-          Camera error occurred. Retry or check your camera connection.
-        </p>
-      )}
-      {state === "STOPPED" && (
-        <p className="mt-2 text-sm text-text-muted">Camera stopped.</p>
-      )}
-      <div className="mt-6 flex gap-2">
-        <button
-          type="button"
-          onClick={handleStart}
-          disabled={starting || state === "ACTIVE"}
-        >
-          Start camera
-        </button>
-        <button type="button" onClick={stop} disabled={state !== "ACTIVE"}>
-          Stop camera
-        </button>
-      </div>
-      <div className="mt-6 rounded-lg border border-border bg-surface p-4 shadow-panel">
-        <p className="text-xs text-text-muted">Design tokens</p>
-        <p className="mt-1 text-base">
-          surface · border · radius-lg · shadow-panel
-        </p>
-      </div>
-    </main>
+    <div className="flex min-h-dvh flex-col bg-bg text-text">
+      <TopBar />
+
+      <main className="flex flex-1 flex-col items-center justify-between p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full gap-6">
+        {/* Camera / Viewport Area */}
+        <div className="relative flex w-full max-w-4xl flex-1 items-center justify-center overflow-hidden rounded-2xl border border-border bg-surface shadow-panel aspect-4/3 md:aspect-16/9 min-h-[320px]">
+          <StatePanel state={state} />
+
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover -scale-x-100"
+          />
+
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 h-full w-full object-cover -scale-x-100"
+          />
+
+          {state !== "ACTIVE" && (
+            <div className="flex flex-col items-center justify-center p-6 text-center z-0">
+              <div className="h-16 w-16 mb-4 rounded-full bg-surface-raised border border-border flex items-center justify-center text-2xl">
+                👤
+              </div>
+              <h2 className="text-lg font-medium text-text">Camera Inactive</h2>
+              <p className="text-sm text-text-muted mt-1 max-w-sm">
+                Press &quot;Start Camera&quot; to begin real-time hairstyle try-on.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Interactive Area */}
+        <div className="w-full max-w-4xl space-y-4">
+          <ControlBar
+            isCameraActive={state === "ACTIVE"}
+            onStart={handleStart}
+            onStop={stop}
+            onSnapshot={handleSnapshot}
+            starting={starting}
+          />
+
+          <div className="rounded-xl border border-border bg-surface p-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-3">
+              Select Hairstyle
+            </h3>
+            <HairstyleStrip
+              selectedId={selectedHairstyle}
+              onSelect={setSelectedHairstyle}
+            />
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }

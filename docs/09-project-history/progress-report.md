@@ -20,17 +20,17 @@
 | Metric | Value |
 |---|---|
 | Tasks total | 71 |
-| Done | 25 |
+| Done | 27 |
 | In progress | 0 |
 | Blocked | 4 |
 | Review | 0 |
-| To do | 42 |
-| Overall completion | 37% |
+| To do | 40 |
+| Overall completion | 38% |
 
 | Milestone | Completion |
 |---|---|
 | M0 Documentation & Research | 94% (16/17) |
-| M1 Project Foundation | 56% (5/9) |
+| M1 Project Foundation | 78% (7/9) |
 | M2 Camera System | 100% (4/4) |
 | M3 Face Detection & Tracking | 0% |
 | M4 Hairstyle Rendering | 0% |
@@ -96,21 +96,23 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 - Assumptions: see `docs/04-ai-research/ai-research.md`.
 - Files modified: documentation only.
 
-### 2026-11-21 — Folder architecture
+### 2026-11-21 — Folder architecture & App shell
 
-- Tasks: TASK-025.
+- Tasks: TASK-025, TASK-026.
 - Completed:
   - Created source folder architecture (`src/` modular folders and `src/types/index.ts`).
+  - Built responsive application shell and layout skeleton (`TopBar`, `HairstyleStrip`, `ControlBar`, `StatePanel` in `src/App.tsx`).
 - Commands run and real results:
   - `npm run typecheck` → exit 0.
+  - `npm run lint` → exit 0.
   - `npm test` → 16 passed.
+  - `npm run test:e2e` → 1 passed.
   - `npm run build` → exit 0.
-  - `git status --short` → clean.
-- Remaining: TASK-026 (app shell), then TASK-027 (CI).
+- Remaining: TASK-027 (CI).
 - Blockers: TASK-015 (asset sourcing), TASK-085 (no remote), TASK-086 (upstream advisory),
   P-009 (model license).
 - Assumptions: none.
-- Files modified: `src/types/index.ts` created, folders created, `TASK_BOARD.md` and `progress-report.md` updated.
+- Files modified: `src/components/*`, `src/App.tsx`, `TASK_BOARD.md`, `progress-report.md`.
 
 ### 2026-11-18 — Phase 0 approvals closed, Phase 1 scaffold
 
