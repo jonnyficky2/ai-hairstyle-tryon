@@ -9,6 +9,8 @@ export default tseslint.config(
       "playwright-report/**",
       "test-results/**",
       ".uads/**",
+      "public/**",
+      "scripts/**",
     ],
   },
   js.configs.recommended,

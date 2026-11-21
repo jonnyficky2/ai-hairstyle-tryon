@@ -20,19 +20,19 @@
 | Metric | Value |
 |---|---|
 | Tasks total | 71 |
-| Done | 28 |
+| Done | 29 |
 | In progress | 0 |
 | Blocked | 4 |
 | Review | 0 |
-| To do | 39 |
-| Overall completion | 39% |
+| To do | 38 |
+| Overall completion | 41% |
 
 | Milestone | Completion |
 |---|---|
 | M0 Documentation & Research | 94% (16/17) |
 | M1 Project Foundation | 89% (8/9) |
 | M2 Camera System | 100% (4/4) |
-| M3 Face Detection & Tracking | 0% |
+| M3 Face Detection & Tracking | 13% (1/8) |
 | M4 Hairstyle Rendering | 0% |
 | M5 User Experience | 0% |
 | M6 Quality & Optimization | 0% (0/10) |
@@ -77,11 +77,32 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 
 ## 7. Next actions
 
-1. Phase 3 (Face Detection & Tracking): TASK-040 (Self-host MediaPipe WASM and model assets), then TASK-041.
+1. Phase 3 (Face Detection & Tracking): TASK-041 (Integrate Face Landmarker in VIDEO mode).
 2. Decide asset sourcing (TASK-015) before Phase 4.
 3. Choose a git remote (TASK-085).
 
 ## 8. Session log
+
+### 2026-11-22 — MediaPipe WASM and model assets self-hosting (TASK-040)
+
+- Tasks: TASK-040.
+- Completed:
+  - Installed `@mediapipe/tasks-vision` pinned in `package.json`.
+  - Added self-hosted MediaPipe WASM runtime under `public/wasm/` and `face_landmarker.task` under `public/models/`.
+  - Added `scripts/sync-mediapipe.js` and npm script `sync:mediapipe`.
+  - Added Playwright test `e2e/assets.spec.ts` to verify asset reachability and size.
+  - Updated `eslint.config.js` to ignore `public/**` and `scripts/**`.
+- Commands run and real results:
+  - `npm run sync:mediapipe` → MediaPipe WASM files synced.
+  - `npm run typecheck` → exit 0.
+  - `npm run lint` → exit 0.
+  - `npm test` → 16 passed.
+  - `npm run test:e2e` → 2 passed (smoke and assets tests).
+  - `npm run build` → exit 0.
+- Remaining: TASK-041…TASK-047 (Milestone 3). Next concrete step: TASK-041.
+- Blockers: TASK-015 (asset sourcing), TASK-085 (no remote), TASK-086 (upstream advisory), P-009 (model license).
+- Assumptions: none.
+- Files modified: `package.json`, `package-lock.json`, `eslint.config.js`, `scripts/sync-mediapipe.js`, `e2e/assets.spec.ts`, `docs/05-development/TASK_BOARD.md`, `docs/09-project-history/progress-report.md`.
 
 ### 2026-11-22 — CI Pipeline configuration
 

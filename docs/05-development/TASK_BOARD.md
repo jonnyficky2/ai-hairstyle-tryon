@@ -25,15 +25,15 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 28 |
-| TODO | 39 |
+| DONE | 29 |
+| TODO | 38 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
 | P1 tasks | 15 |
-| Overall completion | 39% (28/71) |
+| Overall completion | 41% (29/71) |
 
 ## Milestones
 
@@ -42,7 +42,7 @@ Rules:
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
 | M1 | Project Foundation | TASK-020…027, 085 | 8/9 | 89% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 4/4 | 100% | DONE |
-| M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
+| M3 | Face Detection & Tracking | TASK-040…047 | 1/8 | 13% | IN_PROGRESS |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
 | M5 | User Experience | TASK-060…068 | 0/9 | 0% | TODO |
 | M6 | Quality & Optimization | TASK-070…078, 086 | 0/10 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…027, TASK-030…033 |
-| TODO | TASK-040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…027, TASK-030…033, TASK-040 |
+| TODO | TASK-041…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -358,12 +358,12 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 ## Phase 3 — Face Detection & Tracking (M3)
 
 ### TASK-040 — Self-host MediaPipe WASM and model assets
-- Phase: 3 · Milestone: M3 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 3 · Milestone: M3 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-021
 - Description: Copy runtime WASM and `face_landmarker.task` into the build; configure MIME and caching.
 - Acceptance: App initializes with only same-origin requests; no CDN dependency.
 - Verification: Network log; offline-except-origin test.
-- Evidence: Network capture; asset paths.
+- Evidence: `scripts/sync-mediapipe.js`; `e2e/assets.spec.ts`; `public/wasm/`, `public/models/`.
 
 ### TASK-041 — Integrate Face Landmarker in VIDEO mode
 - Phase: 3 · Milestone: M3 · Priority: P0 · Status: **TODO** · Complexity: L

@@ -11,10 +11,12 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "sync:mediapipe": "node scripts/sync-mediapipe.js",
     "test": "vitest run",
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^1.2.2",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
