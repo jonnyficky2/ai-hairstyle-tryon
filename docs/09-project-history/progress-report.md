@@ -20,17 +20,17 @@
 | Metric | Value |
 |---|---|
 | Tasks total | 71 |
-| Done | 27 |
+| Done | 28 |
 | In progress | 0 |
 | Blocked | 4 |
 | Review | 0 |
-| To do | 40 |
-| Overall completion | 38% |
+| To do | 39 |
+| Overall completion | 39% |
 
 | Milestone | Completion |
 |---|---|
 | M0 Documentation & Research | 94% (16/17) |
-| M1 Project Foundation | 78% (7/9) |
+| M1 Project Foundation | 89% (8/9) |
 | M2 Camera System | 100% (4/4) |
 | M3 Face Detection & Tracking | 0% |
 | M4 Hairstyle Rendering | 0% |
@@ -77,12 +77,28 @@ See `docs/01-product/prd.md` §7 and `docs/09-project-history/decision-log.md` �
 
 ## 7. Next actions
 
-1. TASK-026 (app shell), then TASK-027 (CI). TASK-030/031/032 were closed on owner-reported UAT.
-2. TASK-026 (app shell), then TASK-027 (CI). TASK-030/031/032 were closed on owner-reported UAT.
-3. Decide asset sourcing (TASK-015) before Phase 4.
-4. Choose a git remote (TASK-085).
+1. Phase 3 (Face Detection & Tracking): TASK-040 (Self-host MediaPipe WASM and model assets), then TASK-041.
+2. Decide asset sourcing (TASK-015) before Phase 4.
+3. Choose a git remote (TASK-085).
 
 ## 8. Session log
+
+### 2026-11-22 — CI Pipeline configuration
+
+- Tasks: TASK-027.
+- Completed:
+  - Created `.github/workflows/ci.yml` with typecheck, lint, test, playwright e2e, and build jobs.
+- Commands run and real results:
+  - `npm run typecheck` → exit 0.
+  - `npm run lint` → exit 0.
+  - `npm test` → 16 passed.
+  - `npm run test:e2e` → 1 passed.
+  - `npm run build` → exit 0.
+- Remaining: Milestone 3 (TASK-040…TASK-047).
+- Blockers: TASK-015 (asset sourcing), TASK-085 (no remote), TASK-086 (upstream advisory),
+  P-009 (model license).
+- Assumptions: none.
+- Files modified: `.github/workflows/ci.yml`, `TASK_BOARD.md`, `progress-report.md`.
 
 ### 2026-11-09 — Documentation baseline
 

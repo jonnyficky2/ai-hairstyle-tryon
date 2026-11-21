@@ -25,22 +25,22 @@ Rules:
 | Metric | Value |
 |---|---|
 | Total tasks | 71 |
-| DONE | 27 |
-| TODO | 40 |
+| DONE | 28 |
+| TODO | 39 |
 | BLOCKED | 4 |
 | IN_PROGRESS | 0 |
 | REVIEW | 0 |
 | CANCELLED | 0 |
 | P0 tasks | 55 |
 | P1 tasks | 15 |
-| Overall completion | 38% (27/71) |
+| Overall completion | 39% (28/71) |
 
 ## Milestones
 
 | Milestone | Title | Tasks | Done | Completion | Status |
 |---|---|---|---|---|---|
 | M0 | Documentation & Research | TASK-001…017 | 16/17 | 94% | IN_PROGRESS |
-| M1 | Project Foundation | TASK-020…027, 085 | 7/9 | 78% | IN_PROGRESS |
+| M1 | Project Foundation | TASK-020…027, 085 | 8/9 | 89% | IN_PROGRESS |
 | M2 | Camera System | TASK-030…033 | 4/4 | 100% | DONE |
 | M3 | Face Detection & Tracking | TASK-040…047 | 0/8 | 0% | TODO |
 | M4 | Hairstyle Rendering | TASK-050…058 | 0/9 | 0% | TODO |
@@ -55,8 +55,8 @@ M0 is not complete: asset sourcing (TASK-015) is blocked and blocks TASK-051. Al
 
 | Status | Tasks |
 |---|---|
-| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…026, TASK-030…033 |
-| TODO | TASK-027, 040…047, 050, 052…058, 060…068, 070…078, 080…084 |
+| DONE | TASK-001…014, TASK-016, TASK-017, TASK-020…027, TASK-030…033 |
+| TODO | TASK-040…047, 050, 052…058, 060…068, 070…078, 080…084 |
 | BLOCKED | TASK-015, TASK-051, TASK-085, TASK-086 |
 | IN_PROGRESS | — |
 | REVIEW | — |
@@ -297,12 +297,12 @@ Parallel branch that can delay the path: TASK-015 → TASK-051 → TASK-052 (ass
 - Evidence: Responsive shell (`TopBar`, `HairstyleStrip`, `ControlBar`, `StatePanel`) implemented in `App.tsx`; `e2e/smoke.spec.ts` smoke test passes.
 
 ### TASK-027 — Configure CI pipeline
-- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **TODO** · Complexity: M
+- Phase: 1 · Milestone: M1 · Priority: P0 · Status: **DONE** · Complexity: M
 - Dependencies: TASK-023, TASK-024
 - Description: Run install, typecheck, lint, unit tests, build, and E2E smoke in CI.
 - Acceptance: CI green on the initial commit; failures block merge.
 - Verification: CI run URL/log.
-- Evidence: CI configuration; passing run.
+- Evidence: `.github/workflows/ci.yml` committed; local verification of all steps succeeded (exit 0).
 
 ## Phase 2 — Camera System (M2)
 
